@@ -28,6 +28,7 @@ import csv
 
 import cxr_dataset as CXR
 import eval_model as E
+import densenet as densenet
 
 use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
@@ -262,7 +263,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
     # please do not attempt to train without GPU as will take excessively long
     if not use_gpu:
         raise ValueError("Error, requires GPU")
-    model = models.densenet121(pretrained=True)
+    model = densenet.densenet121(pretrained=True)
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
     # activation
