@@ -253,17 +253,18 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
         transformed_datasets['train'],
         batch_size=BATCH_SIZE,
         shuffle=True,
-        num_workers=8)
+        num_workers=0)
     dataloaders['val'] = torch.utils.data.DataLoader(
         transformed_datasets['val'],
         batch_size=BATCH_SIZE,
         shuffle=True,
-        num_workers=8)
+        num_workers=0)
 
     # please do not attempt to train without GPU as will take excessively long
     if not use_gpu:
         raise ValueError("Error, requires GPU")
     model = densenet.densenet121(pretrained=True)
+    print(model)
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
     # activation
