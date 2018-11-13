@@ -22,18 +22,15 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
-
+    print(num_layers)
     if num_layers > 42:
         block_config = (6, 12, 24, num_layers - 42)
-    else : 
-        if num_layers > 18:
+    elif num_layers > 18:
         block_config = (6, 12, num_layers - 18)
-        else :
-            if num_layers > 6:
-            block_config = (6, num_layers - 6)
-            else : 
-                if num_layers > 0:
-                block_config = (num_layers)
+    elif num_layers > 6:
+        block_config = (6, num_layers - 6)
+    elif num_layers > 0:
+        block_config = (num_layers)
 
 
     model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config,
