@@ -186,7 +186,7 @@ def train_model(
     return model, best_epoch
 
 
-def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
+def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     """
     Train torchvision model to NIH data given high level hyperparameters.
 
@@ -263,7 +263,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
     # please do not attempt to train without GPU as will take excessively long
     #if not use_gpu:
     #    raise ValueError("Error, requires GPU")
-    model = densenet.densenet121(pretrained=False)
+    model = densenet.densenet121(pretrained=False, num_layers=NUM_LAYERS)
     print(model)
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
