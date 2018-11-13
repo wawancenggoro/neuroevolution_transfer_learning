@@ -261,8 +261,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
         num_workers=0)
 
     # please do not attempt to train without GPU as will take excessively long
-    if not use_gpu:
-        raise ValueError("Error, requires GPU")
+    #if not use_gpu:
+    #    raise ValueError("Error, requires GPU")
     model = densenet.densenet121(pretrained=True)
     print(model)
     num_ftrs = model.classifier.in_features
@@ -286,8 +286,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY):
     dataset_sizes = {x: len(transformed_datasets[x]) for x in ['train', 'val']}
 
     # train model
-    model, best_epoch = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
-                                    dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY)
+    #model, best_epoch = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
+     #                               dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
