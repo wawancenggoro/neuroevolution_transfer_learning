@@ -60,7 +60,9 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
                     new_key = res.group(1) + res.group(2)
                     state_dict[new_key] = state_dict[key]
                     del state_dict[key]
-            i=i+1
+            else:
+                state_dict.pop('key', None)
+            i=i+1    
         model.load_state_dict(state_dict)
 
     return model
