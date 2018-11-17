@@ -52,7 +52,7 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         # import pdb
         # pdb.set_trace()
         i = 0
-        limit = 5 + (10*num_layers) + (5* transition)
+        limit = 5 + (10*num_layers) + (5* transition) + 6
         for key in list(state_dict.keys()):
             if i < limit:
                 res = pattern.match(key)
@@ -63,17 +63,16 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
             else:
                 state_dict.pop(key, None)
             i=i+1    
-            lastkey = key
         model.load_state_dict(state_dict)
         # import IPython
         # IPython.embed()
 
         #19 = sisa layer dari denseblck terakhir
         #32 = nama layer.outchannels (model.features.denseblock4.denselayer3.conv2.out_channels)
-        model.features.add_module('norm5', nn.BatchNorm2d(model.num_features))
+        # model.features.add_module('norm5', nn.BatchNorm2d(model.num_features))
 
-        # Linear layer
-        model.classifier = nn.Linear(model.num_features, 14)
+        # # Linear layer
+        # model.classifier = nn.Linear(model.num_features, 14)
 
 
     return model
@@ -236,10 +235,10 @@ class DenseNet(nn.Module):
 
         self.num_features = num_features
         # Final batch norm
-        # self.features.add_module('norm5', nn.BatchNorm2d(num_features))
+        self.features.add_module('norm5', nn.BatchNorm2d(num_features))
 
-        # # Linear layer
-        # self.classifier = nn.Linear(num_features, num_classes)
+        # Linear layer
+        self.classifier = nn.Linear(num_features, num_classes)
 
         # Official init from torch repo.
         for m in self.modules():
