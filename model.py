@@ -216,7 +216,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     N_LABELS = 14  # we are predicting 14 labels
 
     # load labels
-    df = pd.read_csv("nih_labels.csv", index_col=0)f
+    df = pd.read_csv("nih_labels.csv", index_col=0)
 
     # define torchvision transforms
     data_transforms = {
