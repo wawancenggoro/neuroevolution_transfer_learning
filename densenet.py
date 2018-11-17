@@ -24,9 +24,6 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
     """
     print(num_layers)
 
-    import pdb
-    pdb.set_trace()
-
     if num_layers > 42:
         block_config = (6, 12, 24, num_layers - 42)
     elif num_layers > 18:
