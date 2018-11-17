@@ -64,8 +64,10 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
                 state_dict.pop(key, None)
             i=i+1    
         model.load_state_dict(state_dict)
+        import pdb
+        pdb.set_trace()
 
-        model.features.add_module('norm5', nn.BatchNorm2d(num_features))
+        model.features.add_module('norm5', nn.BatchNorm2d())
 
         # Linear layer
         model.classifier = nn.Linear(num_features, num_classes)
