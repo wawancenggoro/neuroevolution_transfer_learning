@@ -64,8 +64,8 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
                 state_dict.pop(key, None)
             i=i+1    
         model.load_state_dict(state_dict)
-        import pdb
-        pdb.set_trace()
+        import IPython
+        IPython.embed()
 
         model.features.add_module('norm5', nn.BatchNorm2d())
 
