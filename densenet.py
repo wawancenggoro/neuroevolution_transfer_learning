@@ -49,8 +49,8 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         dictList = []
         for key in list(state_dict.keys()):
             dictList.append(key)
-        import pdb
-        pdb.set_trace()
+        # import pdb
+        # pdb.set_trace()
         i = 0
         limit = 5 + (10*num_layers) + (5* transition)
         for key in list(state_dict.keys()):
@@ -61,7 +61,7 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
                     state_dict[new_key] = state_dict[key]
                     del state_dict[key]
             else:
-                state_dict.pop('key', None)
+                state_dict.pop(key, None)
             i=i+1    
         model.load_state_dict(state_dict)
 
