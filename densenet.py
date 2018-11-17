@@ -52,7 +52,7 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         # import pdb
         # pdb.set_trace()
         i = 0
-        limit = 5 + (10*num_layers) + (5* transition) + 6
+        limit = 5 + (10*num_layers) + (5* transition)
         for key in list(state_dict.keys()):
             if i < limit:
                 res = pattern.match(key)
@@ -64,6 +64,12 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
                 state_dict.pop(key, None)
             i=i+1    
         model.load_state_dict(state_dict)
+
+        model.features.add_module('norm5', nn.BatchNorm2d(num_features))
+
+        # Linear layer
+        model.classifier = nn.Linear(num_features, num_classes)
+
 
     return model
 
@@ -223,10 +229,10 @@ class DenseNet(nn.Module):
                 num_features = num_features // 2
 
         # Final batch norm
-        self.features.add_module('norm5', nn.BatchNorm2d(num_features))
+        # self.features.add_module('norm5', nn.BatchNorm2d(num_features))
 
-        # Linear layer
-        self.classifier = nn.Linear(num_features, num_classes)
+        # # Linear layer
+        # self.classifier = nn.Linear(num_features, num_classes)
 
         # Official init from torch repo.
         for m in self.modules():
