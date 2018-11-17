@@ -8,6 +8,6 @@ import model as M
 PATH_TO_IMAGES = "../images/"
 WEIGHT_DECAY = 1e-4
 LEARNING_RATE = 0.01
-NUM_LAYERS = 58
+NUM_LAYERS = 45
 preds, aucs = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY,NUM_LAYERS)
 

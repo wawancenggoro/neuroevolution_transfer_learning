@@ -52,8 +52,6 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
             if i < limit:
                 res = pattern.match(key)
                 if res:
-                    import pdb
-                    pdb.set_trace()
                     new_key = res.group(1) + res.group(2)
                     state_dict[new_key] = state_dict[key]
                     del state_dict[key]
