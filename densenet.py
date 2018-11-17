@@ -22,7 +22,6 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
     """
-    print(num_layers)
     if num_layers > 42:
         block_config = (6, 12, 24, num_layers - 42)
         transition = 3
