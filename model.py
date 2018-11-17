@@ -263,10 +263,12 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS):
     # please do not attempt to train without GPU as will take excessively long
     if not use_gpu:
        raise ValueError("Error, requires GPU")
+
+    print("=> Use ",NUM_LAYERS," layers")
     model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS)
     
     #freezing layers
-    print("=> freezing ",FREEZE_LAYERS," layers")
+    print("=> Freezing ",FREEZE_LAYERS," layers")
     i=0
     limit_freeze = FREEZE_LAYERS
     for param in model.features.parameters():
