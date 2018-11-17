@@ -36,7 +36,7 @@ def densenet121(pretrained=False, num_layers = 0, drop_rate = 0, **kwargs):
 
 
     model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config, drop_rate=drop_rate
-                     **kwargs)
+                     **kwargs, *args)
     if pretrained:
         # '.'s are no longer allowed in module names, but pervious _DenseLayer
         # has keys 'norm.1', 'relu.1', 'conv.1', 'norm.2', 'relu.2', 'conv.2'.
