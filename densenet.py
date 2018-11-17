@@ -45,6 +45,7 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         state_dict = model_zoo.load_url(model_urls['densenet121'])
         for key in list(state_dict.keys()):
             res = pattern.match(key)
+            print(key)
             if res:
                 new_key = res.group(1) + res.group(2)
                 state_dict[new_key] = state_dict[key]

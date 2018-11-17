@@ -216,7 +216,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     N_LABELS = 14  # we are predicting 14 labels
 
     # load labels
-    df = pd.read_csv("nih_labels.csv", index_col=0)
+    df = pd.read_csv("nih_labels.csv", index_col=0)f
 
     # define torchvision transforms
     data_transforms = {
@@ -263,8 +263,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     # please do not attempt to train without GPU as will take excessively long
     if not use_gpu:
        raise ValueError("Error, requires GPU")
-    model = densenet.densenet121(pretrained=False, num_layers=NUM_LAYERS)
-    print(model)
+    model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS)
+    model_source = models.densenet121(pretrained=True)
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
     # activation
@@ -273,6 +273,12 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
 
     # put model on GPU
     model = model.cuda()
+    model_source = model_source.cuda()
+
+    # #Transfer initial convolution
+    # print("=> transferring and freezing initial convolution")
+    # model.features
+
 
     # define criterion, optimizer for training
     criterion = nn.BCELoss()
