@@ -186,7 +186,7 @@ def train_model(
     return model, best_epoch
 
 
-def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS):
+def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE):
     """
     Train torchvision model to NIH data given high level hyperparameters.
 
@@ -265,7 +265,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS):
        raise ValueError("Error, requires GPU")
 
     print("=> Use ",NUM_LAYERS," layers")
-    model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS)
+    model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS, drop_rate= DROP_RATE)
     
     #freezing layers
     print("=> Freezing ",FREEZE_LAYERS," layers")

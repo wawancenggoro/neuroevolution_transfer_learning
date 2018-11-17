@@ -16,7 +16,7 @@ model_urls = {
 }
 
 
-def densenet121(pretrained=False, num_layers = 0, **kwargs):
+def densenet121(pretrained=False, num_layers = 0, drop_rate = 0, **kwargs):
     r"""Densenet-121 model from
     `"Densely Connected Convolutional Networks" <https://arxiv.org/pdf/1608.06993.pdf>`_
     Args:
@@ -35,7 +35,7 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         block_config = (num_layers)
 
 
-    model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config,
+    model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config, drop_rate=drop_rate
                      **kwargs)
     if pretrained:
         # '.'s are no longer allowed in module names, but pervious _DenseLayer
