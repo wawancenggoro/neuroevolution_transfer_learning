@@ -68,10 +68,12 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         import IPython
         IPython.embed()
 
-        model.features.add_module('norm5', nn.BatchNorm2d(19*32))
+        #19 = sisa layer dari denseblck terakhir
+        #32 = nama layer.outchannels (model.features.denseblock4.denselayer3.conv2.out_channels)
+        model.features.add_module('norm5', nn.BatchNorm2d(model.num_features))
 
         # Linear layer
-        model.classifier = nn.Linear(19*32, 14)
+        model.classifier = nn.Linear(model.num_features, 14)
 
 
     return model
@@ -219,6 +221,7 @@ class DenseNet(nn.Module):
             ('pool0', nn.MaxPool2d(kernel_size=3, stride=2, padding=1)),
         ]))
 
+
         # Each denseblock
         num_features = num_init_features
         for i, num_layers in enumerate(block_config):
@@ -231,6 +234,7 @@ class DenseNet(nn.Module):
                 self.features.add_module('transition%d' % (i + 1), trans)
                 num_features = num_features // 2
 
+        self.num_features = num_features
         # Final batch norm
         # self.features.add_module('norm5', nn.BatchNorm2d(num_features))
 
