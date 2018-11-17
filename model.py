@@ -263,7 +263,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     # please do not attempt to train without GPU as will take excessively long
     if not use_gpu:
        raise ValueError("Error, requires GPU")
-    model = densenet.densenet121(pretrained=False, num_layers=NUM_LAYERS)
+    model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS)
     model_source = models.densenet121(pretrained=True)
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
@@ -271,19 +271,13 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     model.classifier = nn.Sequential(
         nn.Linear(num_ftrs, N_LABELS), nn.Sigmoid())
 
-    # import pdb
-    # pdb.set_trace()
-
     # put model on GPU
     model = model.cuda()
     model_source = model_source.cuda()
 
     #Transfer initial convolution
     print("=> transferring and freezing initial convolution")
-    print("before 1 : ",model.features.conv0.weight.data)
-    print("before 2 : ",model_source.features.conv0.weight.data)
-    model.features.conv0.weight.data.copy_(model_source.features.conv0.weight.data)
-    print("after 1 : ",model.features.conv0.weight.data)    
+    model.features.conv0.weight.data.copy_(model_source.features.conv0.weight.data)  
 
     # define criterion, optimizer for training
     criterion = nn.BCELoss()
