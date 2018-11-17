@@ -271,6 +271,9 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     model.classifier = nn.Sequential(
         nn.Linear(num_ftrs, N_LABELS), nn.Sigmoid())
 
+    import pdb
+    pdb.set_trace()
+
     # put model on GPU
     model = model.cuda()
     model_source = model_source.cuda()
