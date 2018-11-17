@@ -264,6 +264,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     if not use_gpu:
        raise ValueError("Error, requires GPU")
 
+    DROP_RATE = Variable(DROP_RATE.float())
+    
     print("=> Training using ",DROP_RATE," drop rate")
 
     print("=> Use ",NUM_LAYERS," layers")
