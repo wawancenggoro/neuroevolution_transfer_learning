@@ -277,7 +277,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
 
     #Transfer initial convolution
     print("=> transferring and freezing initial convolution")
-    model.features.conv0.weight.data.copy_(model_source.features.conv0.weight.data)  
+    # model.features.conv0.weight.data.copy_(model_source.features.conv0.weight.data)  
 
     # define criterion, optimizer for training
     criterion = nn.BCELoss()
@@ -291,8 +291,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     dataset_sizes = {x: len(transformed_datasets[x]) for x in ['train', 'val']}
 
     # train model
-    # model, best_epoch = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
-    #                                 dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY)
+    model, best_epoch = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
+                                    dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
