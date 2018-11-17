@@ -48,7 +48,7 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         state_dict = model_zoo.load_url(model_urls['densenet121'])
         dictList = []
         for key in list(state_dict.keys()):
-            dictlist.append(key)
+            dictList.append(key)
         import pdb
         pdb.set_trace()
         i = 0
