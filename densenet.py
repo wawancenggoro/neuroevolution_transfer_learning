@@ -46,7 +46,9 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         pattern = re.compile(
             r'^(.*denselayer\d+\.(?:norm|relu|conv))\.((?:[12])\.(?:weight|bias|running_mean|running_var))$')
         state_dict = model_zoo.load_url(model_urls['densenet121'])
-
+        dictList = []
+        for key in list(state_dict.keys()):
+            dictlist.append(key)
         import pdb
         pdb.set_trace()
         i = 0
