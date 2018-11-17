@@ -264,8 +264,6 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     if not use_gpu:
        raise ValueError("Error, requires GPU")
     model = densenet.densenet121(pretrained=False, num_layers=NUM_LAYERS)
-    import pdb
-    pdb.set_trace()
     model_source = models.densenet121(pretrained=True)
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
