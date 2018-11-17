@@ -52,7 +52,7 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         # import pdb
         # pdb.set_trace()
         i = 0
-        limit = 5 + (10*num_layers) + (5* transition)
+        limit = 5 + (10*num_layers) + (5* transition) + 6
         for key in list(state_dict.keys()):
             if i < limit:
                 res = pattern.match(key)
