@@ -65,8 +65,8 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
             i=i+1    
             lastkey = key
         model.load_state_dict(state_dict)
-        import IPython
-        IPython.embed()
+        # import IPython
+        # IPython.embed()
 
         #19 = sisa layer dari denseblck terakhir
         #32 = nama layer.outchannels (model.features.denseblock4.denselayer3.conv2.out_channels)

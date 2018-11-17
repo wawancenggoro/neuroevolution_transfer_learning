@@ -278,8 +278,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     #Transfer initial convolution
     print("=> transferring and freezing initial convolution")
      # model.features.conv0.weight.data.copy_(model_source.features.conv0.weight.data)  
-    print("custom : ",model.features.conv0.weight)
-    print("ori : ",model_source.features.conv0.weight)
+    print("custom : ",model.features.norm5.weight)
+    print("ori : ",model_source.features.norm5.weight)
 
     # define criterion, optimizer for training
     criterion = nn.BCELoss()
