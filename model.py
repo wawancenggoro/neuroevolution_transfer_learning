@@ -186,7 +186,7 @@ def train_model(
     return model, best_epoch
 
 
-def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
+def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS):
     """
     Train torchvision model to NIH data given high level hyperparameters.
 
@@ -264,7 +264,17 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     if not use_gpu:
        raise ValueError("Error, requires GPU")
     model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS)
-    model_source = models.densenet121(pretrained=True)
+    
+    #freezing layers
+    print("=> freezing ",FREEZE_LAYERS," layers")
+    i=0
+    limit_freeze = FREEZE_LAYERS
+    for param in model.features.parameters():
+        if i< limit_freeze:
+            param.requires_grad = False
+        i=i+1
+
+
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
     # activation
@@ -273,13 +283,6 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
 
     # put model on GPU
     model = model.cuda()
-    model_source = model_source.cuda()
-
-    #Transfer initial convolution
-    print("=> transferring and freezing initial convolution")
-     # model.features.conv0.weight.data.copy_(model_source.features.conv0.weight.data)  
-    print("custom : ",model.features.norm5.weight)
-    print("ori : ",model_source.features.norm5.weight)
 
     # define criterion, optimizer for training
     criterion = nn.BCELoss()
