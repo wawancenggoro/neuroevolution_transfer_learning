@@ -275,9 +275,9 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     model = model.cuda()
     model_source = model_source.cuda()
 
-    # #Transfer initial convolution
-    # print("=> transferring and freezing initial convolution")
-    # model.features
+    #Transfer initial convolution
+    print("=> transferring and freezing initial convolution")
+    model.features.conv0.weight.data.copy_(model_source.module.densenet121.features.conv0.weight.data)
 
 
     # define criterion, optimizer for training
