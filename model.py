@@ -295,8 +295,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
     dataset_sizes = {x: len(transformed_datasets[x]) for x in ['train', 'val']}
 
     # train model
-    model, best_epoch = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
-                                    dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY)
+    # model, best_epoch = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
+    #                                 dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
