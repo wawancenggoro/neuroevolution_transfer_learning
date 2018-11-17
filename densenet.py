@@ -67,10 +67,10 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         import IPython
         IPython.embed()
 
-        model.features.add_module('norm5', nn.BatchNorm2d())
+        model.features.add_module('norm5', nn.BatchNorm2d(32))
 
         # Linear layer
-        model.classifier = nn.Linear(num_features, num_classes)
+        model.classifier = nn.Linear(32, 14)
 
 
     return model
