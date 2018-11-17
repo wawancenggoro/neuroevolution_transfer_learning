@@ -25,10 +25,13 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
     print(num_layers)
     if num_layers > 42:
         block_config = (6, 12, 24, num_layers - 42)
+        transition = 3
     elif num_layers > 18:
         block_config = (6, 12, num_layers - 18)
+        transition = 2
     elif num_layers > 6:
         block_config = (6, num_layers - 6)
+        transition = 1
     elif num_layers > 0:
         block_config = (num_layers)
 
@@ -43,15 +46,18 @@ def densenet121(pretrained=False, num_layers = 0, **kwargs):
         pattern = re.compile(
             r'^(.*denselayer\d+\.(?:norm|relu|conv))\.((?:[12])\.(?:weight|bias|running_mean|running_var))$')
         state_dict = model_zoo.load_url(model_urls['densenet121'])
+        i = 0
+        limit = 5 + (10*num_layers) + (5* transition) + 6
         for key in list(state_dict.keys()):
-            res = pattern.match(key)
-            print("key :",key)
-            print("res :",res)
-            if res:
-                new_key = res.group(1) + res.group(2)
-                state_dict[new_key] = state_dict[key]
-                del state_dict[key]
+            if i < limit:
+                res = pattern.match(key)
+                if res:
+                    new_key = res.group(1) + res.group(2)
+                    state_dict[new_key] = state_dict[key]
+                    del state_dict[key]
+            i=i+1
         model.load_state_dict(state_dict)
+
     return model
 
 
