@@ -277,7 +277,10 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS):
 
     #Transfer initial convolution
     print("=> transferring and freezing initial convolution")
-    model.features.conv0.weight.data.copy_(model_source.module.densenet121.features.conv0.weight.data)
+    print("before 1 : ",model.features.conv0.weight.data)
+    print("before 2 : ",model_source.features.conv0.weight.data)
+    print("after 1 : ",model.features.conv0.weight.data)
+    model.features.conv0.weight.data.copy_(model_source.features.conv0.weight.data)
 
 
     # define criterion, optimizer for training
