@@ -118,13 +118,13 @@ if __name__ == "__main__":
             FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
             LEARNING_RATE = random.uniform(10**-6, 0.1)
             DROP_RATE = self.target[3]*1/100
-            print("LEARNING_RATE ",LEARNING_RATE)
-            print("NUM_LAYERS ",NUM_LAYERS)
-            print("FREEZE_LAYERS ",FREEZE_LAYERS)
-            print("DROP_RATE ",DROP_RATE)
-            # preds, aucs = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE)
+            # print("LEARNING_RATE ",LEARNING_RATE)
+            # print("NUM_LAYERS ",NUM_LAYERS)
+            # print("FREEZE_LAYERS ",FREEZE_LAYERS)
+            # print("DROP_RATE ",DROP_RATE)
+            preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE)
             # preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
-            return 0
+            return epoch_loss
 
         def check_stop(self, fits_populations):
             self.counter += 1
