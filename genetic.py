@@ -9,6 +9,7 @@ class GeneticAlgorithm(object):
 
     def run(self):
         population = self.genetics.initial()
+        print("population ",population)
         counter = 0
         while True:
             self.genetics.target = population[counter]
@@ -199,8 +200,8 @@ if __name__ == "__main__":
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
             PATH_TO_IMAGES = "../images/"
             WEIGHT_DECAY = 1e-4
-            NUM_LAYERS = self.target[0]*58/100
-            FREEZE_LAYERS = self.target[1]*NUM_LAYERS/100
+            NUM_LAYERS = int(round(self.target[0]*58/100))
+            FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
             LEARNING_RATE = 0.01
             DROP_RATE = self.target[3]*1/100
             print("LEARNING_RATE ",LEARNING_RATE)
