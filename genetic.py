@@ -180,10 +180,6 @@ if __name__ == "__main__":
             self.size = size
             self.prob_crossover = prob_crossover
             self.prob_mutation = prob_mutation
-
-
-            PATH_TO_IMAGES = "../images/"
-            WEIGHT_DECAY = 1e-4
             pass
 
         # GeneticFunctions interface impls
@@ -199,6 +195,8 @@ if __name__ == "__main__":
         def fitness(self, chromo):
             # larger is better, matched == 0
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
+            PATH_TO_IMAGES = "../images/"
+            WEIGHT_DECAY = 1e-4
             preds, aucs = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
             return preds
 
