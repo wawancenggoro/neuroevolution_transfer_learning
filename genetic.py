@@ -171,9 +171,10 @@ if __name__ == "__main__":
 
     class evolve(GeneticFunctions):
         def __init__(self, target_text,
-                     limit=200, size=400,
+                     limit=200, size=10,
                      prob_crossover=0.9, prob_mutation=0.2):
             self.target = target_text
+            print(self)
             self.counter = 0
 
             self.limit = limit
@@ -255,7 +256,8 @@ if __name__ == "__main__":
             return "".join(chr(max(1, min(ch, 255))) for ch in chromo)
 
         def random_chromo(self):
-            return [random.randint(1, 255) for i in range(len(self.target))]
+            return [random.randint(1, 100),random.randint(1,100),random.randint(1,100), random.randint(1,100) for i in range(len(self.target))]
+            # return [random.randint(1, 255) for i in range(len(self.target))]
         pass
     # GeneticAlgorithm(GuessText("Hello World!")).run()
     hyperparameter = [45,20,0.01,0.0]
