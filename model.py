@@ -120,6 +120,8 @@ def train_model(
                 outputs = model(inputs)
 
                 # calculate gradient and update parameters in train phase
+                import pdb
+                pdb.set_trace()
                 optimizer.zero_grad()
                 loss = criterion(outputs, labels)
                 if phase == 'train':
