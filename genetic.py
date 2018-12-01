@@ -174,7 +174,7 @@ if __name__ == "__main__":
                      limit=200, size=10,
                      prob_crossover=0.9, prob_mutation=0.2):
             self.target = target_text
-            print(self)
+            print(self.population)
             self.counter = 0
 
             self.limit = limit
