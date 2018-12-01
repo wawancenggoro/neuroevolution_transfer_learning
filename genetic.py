@@ -184,11 +184,6 @@ if __name__ == "__main__":
 
             PATH_TO_IMAGES = "../images/"
             WEIGHT_DECAY = 1e-4
-            LEARNING_RATE = 0.01
-            NUM_LAYERS = 45
-            FREEZE_LAYERS = 20
-            DROP_RATE = 0.0
-            preds, aucs = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
             pass
 
         # GeneticFunctions interface impls
@@ -203,7 +198,9 @@ if __name__ == "__main__":
 
         def fitness(self, chromo):
             # larger is better, matched == 0
-            return -sum(abs(c - t) for c, t in zip(chromo, self.target))
+            # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
+            preds, aucs = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
+            return preds
 
         def check_stop(self, fits_populations):
             self.counter += 1
