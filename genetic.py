@@ -9,6 +9,7 @@ class GeneticAlgorithm(object):
 
     def run(self):
         population = self.genetics.initial()
+        print(population)
         while True:
             fits_pops = [(self.genetics.fitness(ch),  ch) for ch in population]
             if self.genetics.check_stop(fits_pops): break
@@ -174,7 +175,6 @@ if __name__ == "__main__":
                      limit=200, size=10,
                      prob_crossover=0.9, prob_mutation=0.2):
             self.target = target_text
-            print(self.population)
             self.counter = 0
 
             self.limit = limit
