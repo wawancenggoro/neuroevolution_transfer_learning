@@ -291,7 +291,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     # put model on GPU
     model = model.cuda()
 
-    print(model)
+    import pdb
+    pdb.set_trace()
 
     # define criterion, optimizer for training
     criterion = nn.BCELoss()
