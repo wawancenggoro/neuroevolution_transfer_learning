@@ -253,7 +253,7 @@ if __name__ == "__main__":
             return [random.randint(1, 255) for i in range(len(self.target))]
         pass
     # GeneticAlgorithm(GuessText("Hello World!")).run()
-    def hyperparameter = [45,20,0.01,0.0]
+    hyperparameter = [45,20,0.01,0.0]
     GeneticAlgorithm(evolve(hyperparameter)).run()
 
 pass
