@@ -114,8 +114,6 @@ def train_model(
             for data in dataloaders[phase]:
                 i += 1
                 inputs, labels, _ = data
-                import pdb
-                pdb.set_trace()
                 batch_size = inputs.shape[0]
                 inputs = Variable(inputs.cuda())
                 labels = Variable(labels.cuda()).float()
