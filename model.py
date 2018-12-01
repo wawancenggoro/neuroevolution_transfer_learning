@@ -183,7 +183,7 @@ def train_model(
     checkpoint_best = torch.load('results/checkpoint')
     model = checkpoint_best['model']
 
-    return model, best_epoch
+    return model, best_epoch, epoch_loss
 
 
 def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE):
@@ -303,11 +303,11 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     dataset_sizes = {x: len(transformed_datasets[x]) for x in ['train', 'val']}
 
     # train model
-    model, best_epoch = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
+    model, best_epoch, epoch_loss = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
                                     dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
         data_transforms, model, PATH_TO_IMAGES)
 
-    return preds, aucs
+    return preds, aucs, epoch_loss

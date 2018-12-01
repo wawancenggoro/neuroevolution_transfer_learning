@@ -9,11 +9,13 @@ class GeneticAlgorithm(object):
 
     def run(self):
         population = self.genetics.initial()
-        print(population)
+        counter = 0
         while True:
+            self.target = population[counter]
             fits_pops = [(self.genetics.fitness(ch),  ch) for ch in population]
             if self.genetics.check_stop(fits_pops): break
             population = self.next(fits_pops)
+            counter += 1
             pass
         return population
 
@@ -174,7 +176,6 @@ if __name__ == "__main__":
         def __init__(self, target_text,
                      limit=200, size=10,
                      prob_crossover=0.9, prob_mutation=0.2):
-            self.target = target_text
             self.counter = 0
 
             self.limit = limit
@@ -198,8 +199,8 @@ if __name__ == "__main__":
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
             PATH_TO_IMAGES = "../images/"
             WEIGHT_DECAY = 1e-4
-            preds, aucs = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
-            return preds
+            preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
+            return epoch_loss
 
         def check_stop(self, fits_populations):
             self.counter += 1
@@ -212,7 +213,7 @@ if __name__ == "__main__":
                 print(
                     "[G %3d] score=(%4d, %4d, %4d): %r" %
                     (self.counter, best, ave, worst,
-                     self.chromo2text(best_match)))
+                     self.fitness))
                 pass
             return self.counter >= self.limit
 
@@ -260,8 +261,7 @@ if __name__ == "__main__":
             # return [random.randint(1, 255) for i in range(len(self.target))]
         pass
     # GeneticAlgorithm(GuessText("Hello World!")).run()
-    hyperparameter = [45,20,0.01,0.0]
-
-    GeneticAlgorithm(evolve(hyperparameter)).run()
+    loss = 0.5
+    GeneticAlgorithm(evolve(loss)).run()
 
 pass
