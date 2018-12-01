@@ -200,7 +200,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
         aucs: AUCs for each train,test tuple
 
     """
-    NUM_EPOCHS = 5
+    NUM_EPOCHS = 2
     BATCH_SIZE = 64
 
     try:
