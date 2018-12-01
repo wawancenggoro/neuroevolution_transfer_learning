@@ -256,11 +256,12 @@ if __name__ == "__main__":
             return "".join(chr(max(1, min(ch, 255))) for ch in chromo)
 
         def random_chromo(self):
-            return [random.randint(1, 100),random.randint(1,100),random.randint(1,100), random.randint(1,100) for i in range(len(self.target))]
+            return random.sample(range(1, 100), 4)
             # return [random.randint(1, 255) for i in range(len(self.target))]
         pass
     # GeneticAlgorithm(GuessText("Hello World!")).run()
     hyperparameter = [45,20,0.01,0.0]
+
     GeneticAlgorithm(evolve(hyperparameter)).run()
 
 pass
