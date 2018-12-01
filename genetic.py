@@ -11,7 +11,7 @@ class GeneticAlgorithm(object):
         population = self.genetics.initial()
         counter = 0
         while True:
-            self.target = population[counter]
+            self.genetics.target = population[counter]
             fits_pops = [(self.genetics.fitness(ch),  ch) for ch in population]
             if self.genetics.check_stop(fits_pops): break
             population = self.next(fits_pops)
