@@ -1,5 +1,7 @@
 import random
 
+import model as M
+
 class GeneticAlgorithm(object):
     def __init__(self, genetics):
         self.genetics = genetics
@@ -172,13 +174,21 @@ if __name__ == "__main__":
                      limit=200, size=400,
                      prob_crossover=0.9, prob_mutation=0.2):
             self.target = target_text
-            print (self.target)
             self.counter = 0
 
             self.limit = limit
             self.size = size
             self.prob_crossover = prob_crossover
             self.prob_mutation = prob_mutation
+
+
+            PATH_TO_IMAGES = "../images/"
+            WEIGHT_DECAY = 1e-4
+            LEARNING_RATE = 0.01
+            NUM_LAYERS = 45
+            FREEZE_LAYERS = 20
+            DROP_RATE = 0.0
+            preds, aucs = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
             pass
 
         # GeneticFunctions interface impls
