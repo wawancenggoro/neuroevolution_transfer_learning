@@ -25,17 +25,21 @@ def densenet121(pretrained=False, num_layers = 0, drop_rate = 0, **kwargs):
     if num_layers > 42:
         block_config = (6, 12, 24, num_layers - 42)
         transition = 3
+        num_blocks = 4
     elif num_layers > 18:
         block_config = (6, 12, num_layers - 18)
         transition = 2
+        num_blocks = 3
     elif num_layers > 6:
         block_config = (6, num_layers - 6)
         transition = 1
+        num_blocks = 2
     elif num_layers > 0:
         block_config = (num_layers)
+        num_blocks = 1
 
 
-    model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config, drop_rate=drop_rate,
+    model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config, drop_rate=drop_rate,num_blocks=num_blocks,
                      **kwargs)
     if pretrained:
         # '.'s are no longer allowed in module names, but pervious _DenseLayer
@@ -207,10 +211,10 @@ class DenseNet(nn.Module):
     """
 
     def __init__(self, growth_rate=32, block_config=(6, 12, 24, 16),
-                 num_init_features=64, bn_size=4, drop_rate=0, num_classes=1000):
+                 num_init_features=64, bn_size=4, drop_rate=0, num_classes=1000,num_blocks=4):
 
         super(DenseNet, self).__init__()
-
+        self.num_blocks = num_blocks
         # First convolution
         self.features = nn.Sequential(OrderedDict([
             ('conv0', nn.Conv2d(3, num_init_features, kernel_size=7, stride=2, padding=3, bias=False)),
@@ -252,6 +256,6 @@ class DenseNet(nn.Module):
     def forward(self, x):
         features = self.features(x)
         out = F.relu(features, inplace=True)
-        out = F.avg_pool2d(out, kernel_size=7, stride=1).view(features.size(0), -1)
+        out = F.avg_pool2d(out, kernel_size=7*(2**(4-self.num_blocks)), stride=1).view(features.size(0), -1)
         out = self.classifier(out)
         return out
