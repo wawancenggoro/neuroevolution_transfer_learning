@@ -3,7 +3,7 @@ import datetime
 def print(MESSAGE):
 
 	currentDT = datetime.datetime.now()
-	filename = str(currentDT.day+"-"+currentDT.month+"-"+currentDT.year+".txt")
+	filename = str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+".txt"
 
 	print(MESSAGE)
 	f=open("logs/"+filename, "a+")
