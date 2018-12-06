@@ -1,6 +1,6 @@
 import datetime
 
-def print(MESSAGE):
+def printlog(MESSAGE):
 
 	currentDT = datetime.datetime.now()
 	filename = str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+".txt"

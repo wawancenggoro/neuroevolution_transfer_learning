@@ -120,8 +120,8 @@ if __name__ == "__main__":
             FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
             LEARNING_RATE = round(random.uniform(10**-6, 0.1),6)
             DROP_RATE = self.target[3]*1/100
-            asd = ("LEARNING_RATE ",LEARNING_RATE)
-            printlog.print(asd)
+            message = ("LEARNING_RATE ",LEARNING_RATE)
+            printlog.printlog(message)
             # print("NUM_LAYERS ",NUM_LAYERS)
             # print("FREEZE_LAYERS ",FREEZE_LAYERS)
             # print("DROP_RATE ",DROP_RATE)
