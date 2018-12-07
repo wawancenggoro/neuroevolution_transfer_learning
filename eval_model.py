@@ -35,7 +35,7 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
         fold="test",
         transform=data_transforms['val'])
     dataloader = torch.utils.data.DataLoader(
-        dataset, BATCH_SIZE, shuffle=False, num_workers=8)
+        dataset, BATCH_SIZE, shuffle=False, num_workers=0)
     size = len(dataset)
 
     # create empty dfs
