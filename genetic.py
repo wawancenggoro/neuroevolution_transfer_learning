@@ -91,7 +91,7 @@ if __name__ == "__main__":
     """
     class evolve(GeneticFunctions):
         def __init__(self, target_text,
-                     limit=50, size=5,
+                     limit=5, size=5,
                      prob_crossover=0.9, prob_mutation=0.2):
             self.counter = 0
 
@@ -128,7 +128,7 @@ if __name__ == "__main__":
             # print("DROP_RATE ",DROP_RATE)
             preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE)
             # preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
-            return epoch_loss
+            return 1 - epoch_loss
 
         def check_stop(self, fits_populations):
             self.counter += 1
@@ -147,8 +147,8 @@ if __name__ == "__main__":
 
         def parents(self, fits_populations):
             while True:
-                father = self.tournament(fits_populations)
-                mother = self.tournament(fits_populations)
+                father = self.roulete_wheels(fits_populations)
+                mother = self.roulete_wheels(fits_populations)
                 yield (father, mother)
                 pass
             pass
@@ -187,6 +187,14 @@ if __name__ == "__main__":
         def random_chromo(self):
             return random.sample(range(1, 100), 4)
             # return [random.randint(1, 255) for i in range(len(self.target))]
+        def roulete_wheels(choices):
+            max = sum(choices.values())
+            pick = random.uniform(0, max)
+            current = 0
+            for key, value in choices.items():
+                current += value
+                if current > pick:
+                    return fits_populations[key]
         pass
     # GeneticAlgorithm(GuessText("Hello World!")).run()
     loss = 0.5
