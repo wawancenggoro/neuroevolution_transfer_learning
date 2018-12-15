@@ -36,7 +36,7 @@ class GeneticAlgorithm(object):
         while len(nexts) < size:
             parents = next(parents_generator)
             cross = random.random() < self.genetics.probability_crossover()
-            children = self.genetics.uniform_crossover(parents) if cross else parents
+            children = self.genetics.crossover(parents) if cross else parents
             for ch in children:
                 mutate = random.random() < self.genetics.probability_mutation()
                 nexts.append(self.genetics.mutation(ch) if mutate else ch)
@@ -121,7 +121,7 @@ if __name__ == "__main__":
         def fitness(self, chromo):
             # larger is better, matched == 0
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
-            PATH_TO_IMAGES = "starter_images"
+            PATH_TO_IMAGES = "../sample_images/"
             WEIGHT_DECAY = 1e-4
             NUM_LAYERS = int(round(self.target[0]*58/100))
             # FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
