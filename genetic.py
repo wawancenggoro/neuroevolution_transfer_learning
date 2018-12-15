@@ -147,8 +147,8 @@ if __name__ == "__main__":
 
         def parents(self, fits_populations):
             while True:
-                father = self.roulete_wheels(fits_populations)
-                mother = self.roulete_wheels(fits_populations)
+                father = self.tournament(fits_populations)
+                mother = self.tournament(fits_populations)
                 yield (father, mother)
                 pass
             pass
