@@ -18,7 +18,7 @@ class CXRDataset(Dataset):
         starter_images = True
         self.transform = transform
         self.path_to_images = path_to_images
-        # self.df = pd.read_csv("starter_images.csv")
+        self.df = pd.read_csv("starter_images.csv")
         # self.df = self.df[self.df['fold'] == fold]
 
         if(starter_images):
