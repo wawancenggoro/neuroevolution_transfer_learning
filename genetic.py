@@ -124,7 +124,8 @@ if __name__ == "__main__":
             PATH_TO_IMAGES = "../images/"
             WEIGHT_DECAY = 1e-4
             NUM_LAYERS = int(round(self.target[0]*58/100))
-            FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
+            # FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
+            FREEZE_LAYERS = NUM_LAYERS-random.randint(1,3)
             LEARNING_RATE = round(random.uniform(10**-6, 0.1),6)
             DROP_RATE = self.target[3]*1/100
             # print("LEARNING_RATE ",LEARNING_RATE)
@@ -139,17 +140,17 @@ if __name__ == "__main__":
 
         def check_stop(self, fits_populations):
             self.counter += 1
-            if self.counter % 10 == 0:
-                best_match = list(sorted(fits_populations))[-1][1]
-                fits = [f for f, ch in fits_populations]
-                best = max(fits)
-                worst = min(fits)
-                ave = sum(fits) / len(fits)
-                print(
-                    "[G %3d] score=(%4d, %4d, %4d): %r" %
-                    (self.counter, best, ave, worst,
-                     self.fitness))
-                pass
+            # if self.counter % 10 == 0:
+            best_match = list(sorted(fits_populations))[-1][1]
+            fits = [f for f, ch in fits_populations]
+            best = max(fits)
+            worst = min(fits)
+            ave = sum(fits) / len(fits)
+            print(
+                "[G %3d] score=(%4d, %4d, %4d): %r" %
+                (self.counter, best, ave, worst,
+                 self.fitness))
+            # pass
             return self.counter >= self.limit
 
         def parents(self, fits_populations):
@@ -168,6 +169,19 @@ if __name__ == "__main__":
             child1 = father[:index1] + mother[index1:index2] + father[index2:]
             child2 = mother[:index1] + father[index1:index2] + mother[index2:]
             return (child1, child2)
+
+        def uniform_crossover(self,parents):
+            father, mother = parents
+            child1 = father
+            child2 = mother
+            for x in range(len(father)):
+                prob = random.uniform(0.0, 1.0)
+                if prob > 0.5:
+                    child1[x] = mother[x]
+                    child2[x] = father[x]
+            return (child1,child2)
+
+            
 
         def mutation(self, chromosome):
             index = random.randint(0, len(self.target) - 1)
