@@ -1,10 +1,13 @@
 import random
-
+import time
 import model as M
 
 import printlog as printlog
 
 class GeneticAlgorithm(object):
+
+    start = time.time()
+
     def __init__(self, genetics):
         self.genetics = genetics
         pass
@@ -16,7 +19,11 @@ class GeneticAlgorithm(object):
         while True:
             self.genetics.target = population[counter]
             fits_pops = [(self.genetics.fitness(ch),  ch) for ch in population]
-            if self.genetics.check_stop(fits_pops): break
+            if self.genetics.check_stop(fits_pops): 
+                stop = time.time()
+                exectime = stop - start
+                print("execution time: ",exectime)
+                break
             population = self.next(fits_pops)
             counter += 1
             pass
@@ -198,6 +205,7 @@ if __name__ == "__main__":
         pass
     # GeneticAlgorithm(GuessText("Hello World!")).run()
     loss = 0.5
+    
     GeneticAlgorithm(evolve(loss)).run()
 
 pass
