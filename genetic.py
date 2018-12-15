@@ -6,8 +6,6 @@ import printlog as printlog
 
 class GeneticAlgorithm(object):
 
-    start = time.time()
-
     def __init__(self, genetics):
         self.genetics = genetics
         pass
@@ -20,9 +18,6 @@ class GeneticAlgorithm(object):
             self.genetics.target = population[counter]
             fits_pops = [(self.genetics.fitness(ch),  ch) for ch in population]
             if self.genetics.check_stop(fits_pops): 
-                stop = time.time()
-                exectime = stop - start
-                print("execution time: ",exectime)
                 break
             population = self.next(fits_pops)
             counter += 1
@@ -121,7 +116,7 @@ if __name__ == "__main__":
         def fitness(self, chromo):
             # larger is better, matched == 0
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
-            PATH_TO_IMAGES = "../sample_images/"
+            PATH_TO_IMAGES = "starter_images/"
             WEIGHT_DECAY = 1e-4
             NUM_LAYERS = int(round(self.target[0]*58/100))
             # FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
