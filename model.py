@@ -216,7 +216,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     N_LABELS = 14  # we are predicting 14 labels
 
     # load labels
-    df = pd.read_csv("nih_labels.csv", index_col=0)
+    df = pd.read_csv("starter_images.csv", index_col=0)
 
     # define torchvision transforms
     data_transforms = {
@@ -265,8 +265,9 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
        raise ValueError("Error, requires GPU")
 
     print("=> Training using ",DROP_RATE," drop rate")
-
+    print("=> Training using ",LR," learning rate")
     print("=> Use ",NUM_LAYERS," layers")
+
     model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS, drop_rate=DROP_RATE)
     
     #freezing layers
