@@ -92,7 +92,7 @@ if __name__ == "__main__":
     class evolve(GeneticFunctions):
         def __init__(self, target_text,
                      limit=5, size=5,
-                     prob_crossover=0.9, prob_mutation=0.2):
+                     prob_crossover=0.9, prob_mutation=0.0):
             self.counter = 0
 
             self.limit = limit
