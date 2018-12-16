@@ -136,6 +136,7 @@ if __name__ == "__main__":
         def check_stop(self, fits_populations):
             self.counter += 1
             # if self.counter % 10 == 0:
+            print("fitness and population : ",fits_populations)
             best_match = list(sorted(fits_populations))[-1][1]
             fits = [f for f, ch in fits_populations]
             best = max(fits)
