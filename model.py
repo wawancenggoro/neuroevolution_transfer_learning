@@ -29,6 +29,7 @@ import csv
 import cxr_dataset as CXR
 import eval_model as E
 import densenet as densenet
+import datetime
 
 use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
@@ -202,7 +203,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     """
     NUM_EPOCHS = 2
     BATCH_SIZE = 32
-
+    currentDT = datetime.datetime.now()
     try:
         rmtree('results/'+str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+'/')
     except BaseException:
