@@ -70,8 +70,8 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
             pred_df = pred_df.append(thisrow, ignore_index=True)
             true_df = true_df.append(truerow, ignore_index=True)
 
-        if(i % 10 == 0):
-            print(str(i * BATCH_SIZE))
+        # if(i % 10 == 0):
+        #     print(str(i * BATCH_SIZE))
 
     auc_df = pd.DataFrame(columns=["label", "auc"])
 
@@ -106,6 +106,6 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
             print("can't calculate auc for " + str(column))
         auc_df = auc_df.append(thisrow, ignore_index=True)
 
-    pred_df.to_csv("results/preds.csv", index=False)
-    auc_df.to_csv("results/aucs.csv", index=False)
+    pred_df.to_csv("results/"+str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+"/preds.csv", index=False)
+    auc_df.to_csv("results/"+str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+"/aucs.csv", index=False)
     return pred_df, auc_df

@@ -204,10 +204,10 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     BATCH_SIZE = 32
 
     try:
-        rmtree('results/')
+        rmtree('results/'+str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+'/')
     except BaseException:
         pass  # directory doesn't yet exist, no need to clear it
-    os.makedirs("results/")
+    os.makedirs("results/"+str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+"/")
 
     # use imagenet mean,std for normalization
     mean = [0.485, 0.456, 0.406]
