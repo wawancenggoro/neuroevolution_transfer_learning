@@ -130,7 +130,7 @@ def train_model(
                     loss.backward()
                     optimizer.step()
 
-                running_loss += loss.data[0] * batch_size
+                running_loss += loss.item() * batch_size
                 end = time.time()
                 execution = end-start
                 print(f"iteration : {i}")
