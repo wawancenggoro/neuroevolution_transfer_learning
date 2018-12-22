@@ -115,7 +115,7 @@ def train_model(
             print("train "+ str(len(dataloaders['train'])))
             print("val " + str(len(dataloaders['val'])))
             for data in dataloaders[phase]: 
-                start = time.time()
+                start = time.time().cuda()
                 i += 1
                 inputs, labels, _ = data
                 batch_size = inputs.shape[0]
@@ -124,14 +124,14 @@ def train_model(
                 outputs = model(inputs)
 
                 # calculate gradient and update parameters in train phase
-                optimizer.zero_grad().cuda()
+                optimizer.zero_grad()
                 loss = criterion(outputs, labels)
                 if phase == 'train':
                     loss.backward()
                     optimizer.step()
 
                 running_loss += loss.item() * batch_size
-                end = time.time()
+                end = time.time().cuda()
                 execution = end-start
                 print(f"iteration : {i}")
                 print(f"running_loss : {running_loss}")
