@@ -275,10 +275,18 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     print("=> Freezing ",FREEZE_LAYERS," layers")
     i=0
     limit_freeze = FREEZE_LAYERS
-    for param in model.features.parameters():
-        if i< limit_freeze:
-            param.requires_grad = False
-        i=i+1
+
+    ct = 0
+    for child in model_ft.children():
+        ct += 1
+        if ct < limit_freeze:
+            for param in child.parameters():
+                param.requires_grad = False
+
+    # for param in model.features.parameters():
+    #     if i< limit_freeze:
+    #         param.requires_grad = False
+    #     i=i+1
    
     # print model
     # print("MODEL")
