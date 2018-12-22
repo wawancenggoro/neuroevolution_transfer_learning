@@ -31,7 +31,7 @@ class GeneticAlgorithm(object):
         while len(nexts) < size:
             parents = next(parents_generator)
             cross = random.random() < self.genetics.probability_crossover()
-            children = self.genetics.crossover(parents) if cross else parents
+            children = self.genetics.uniform_crossover(parents) if cross else parents
             for ch in children:
                 mutate = random.random() < self.genetics.probability_mutation()
                 nexts.append(self.genetics.mutation(ch) if mutate else ch)
@@ -143,7 +143,7 @@ if __name__ == "__main__":
             worst = min(fits)
             ave = sum(fits) / len(fits)
             print(
-                "[G %3d] score=(%4d, %4d, %4d): %r" %
+                "[G %3d] score=(%4f, %4f, %4f): %r" %
                 (self.counter, best, ave, worst,
                  self.fitness))
             # pass
