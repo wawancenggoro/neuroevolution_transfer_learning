@@ -204,11 +204,11 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     NUM_EPOCHS = 2
     BATCH_SIZE = 32
     currentDT = datetime.datetime.now()
-    try:
-        rmtree('results/'+str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+'/')
-    except BaseException:
-        pass  # directory doesn't yet exist, no need to clear it
-    os.makedirs("results/"+str(currentDT.day)+"-"+str(currentDT.month)+"-"+str(currentDT.year)+"/")
+    # try:
+    #     rmtree('results/')
+    # except BaseException:
+    #     pass  # directory doesn't yet exist, no need to clear it
+    # os.makedirs("results/")
 
     # use imagenet mean,std for normalization
     mean = [0.485, 0.456, 0.406]
@@ -302,13 +302,11 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     # print(model)
 
     #print grad
-    print("GRAD")
-    print(model.features.pool0)
-    for param in model.features.parameters():
-        print(param.requires_grad)
+    # print("GRAD")
+    # print(model.features.pool0)
+    # for param in model.features.parameters():
+    #     print(param.requires_grad)
 
-    import pdb
-    pdb.set_trace()
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
     # activation
