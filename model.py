@@ -114,7 +114,7 @@ def train_model(
             # iterate over all data in train/val dataloader:
             print("train "+ str(len(dataloaders['train'])))
             print("val " + str(len(dataloaders['val'])))
-            dataloader_train = dataloaders[phase]
+            dataloader_train = iter(dataloaders[phase])
             for i in range(len(dataloaders[phase])): 
                 data = next(dataloader_train)
                 start = time.time()
