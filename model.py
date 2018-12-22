@@ -114,7 +114,7 @@ def train_model(
             # iterate over all data in train/val dataloader:
             print("train "+ str(len(dataloaders['train'])))
             print("val " + str(len(dataloaders['val'])))
-            for data in dataloaders[phase]:
+            for data in dataloaders[phase]: 
                 start = time.time()
                 i += 1
                 inputs, labels, _ = data
@@ -210,7 +210,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     """
     NUM_EPOCHS = 2
-    BATCH_SIZE = 32
+    BATCH_SIZE = 128
     currentDT = datetime.datetime.now()
     # try:
     #     rmtree('results/')
