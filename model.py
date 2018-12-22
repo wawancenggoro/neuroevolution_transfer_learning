@@ -277,7 +277,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     limit_freeze = FREEZE_LAYERS
 
     ct = 0
-    for child in model_ft.children():
+    for child in model.children():
         ct += 1
         if ct < limit_freeze:
             for param in child.parameters():
