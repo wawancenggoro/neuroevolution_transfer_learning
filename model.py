@@ -112,6 +112,8 @@ def train_model(
             i = 0
             total_done = 0
             # iterate over all data in train/val dataloader:
+            print("train "+ str(len(dataloaders['train'])))
+            print("val" + str(len(dataloaders['val'])))
             for data in dataloaders[phase]:
                 start = time.time()
                 i += 1
@@ -131,6 +133,7 @@ def train_model(
                 running_loss += loss.data[0] * batch_size
                 end = time.time()
                 execution = end-start
+                print(f"iteration : {i}")
                 print(f"running_loss : {running_loss}")
                 print(f"execution time per iteration : {execution}")
 
