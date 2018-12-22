@@ -267,14 +267,30 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     print("=> Training using ",DROP_RATE," drop rate")
     print("=> Training using ",LR," learning rate")
-    print("=> Use ",NUM_LAYERS," layers")
+    print("=> Use ",NUM_LAYERS," layers in blocks")
 
     model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS, drop_rate=DROP_RATE)
     
     #freezing layers
-    print("=> Freezing ",FREEZE_LAYERS," layers")
+    print("=> Freezing ",FREEZE_LAYERS," layers in blocks")
+
+    if FREEZE_LAYERS > 42:
+        transition = 3
+    elif FREEZE_LAYERS > 18:
+        transition = 2
+    elif FREEZE_LAYERS > 6:
+        transition = 1
+    elif FREEZE_LAYERS > 0:
+        transition = 0
+
     i=0
-    limit_freeze = FREEZE_LAYERS
+    limit_freeze = 0
+    #add freeze for first convolution
+    limit_freeze+=3 
+    #add freeze for freeze layers
+    limit_freeze+=(FREEZE_LAYERS * 6)
+    #add freeze for all transition layer that been pass through
+    limit_freeze+=(transition*3)
 
     for param in model.features.parameters():
         if i< limit_freeze:
