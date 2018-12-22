@@ -113,6 +113,7 @@ def train_model(
             total_done = 0
             # iterate over all data in train/val dataloader:
             for data in dataloaders[phase]:
+                start = time.time()
                 i += 1
                 inputs, labels, _ = data
                 batch_size = inputs.shape[0]
@@ -128,6 +129,10 @@ def train_model(
                     optimizer.step()
 
                 running_loss += loss.data[0] * batch_size
+                end = time.time()
+                execution = end-start
+                print(f"running_loss : {running_loss}")
+                print(f"execution time per iteration : {execution}")
 
             epoch_loss = running_loss / dataset_sizes[phase]
 
