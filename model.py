@@ -291,7 +291,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     limit_freeze+=(FREEZE_LAYERS * 6)
     #add freeze for all transition layer that been pass through
     limit_freeze+=(transition*3)
-
+    print(limit_freeze)
     for param in model.features.parameters():
         if i< limit_freeze:
             param.requires_grad = False
