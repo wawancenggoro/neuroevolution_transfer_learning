@@ -114,10 +114,10 @@ def train_model(
             # iterate over all data in train/val dataloader:
             print("train "+ str(len(dataloaders['train'])))
             print("val " + str(len(dataloaders['val'])))
-            # dataloader_train = iter(dataloaders[phase])
-            for data in dataloaders[phase]: 
-            # for i in range(len(dataloaders[phase])): 
-                # data = next(dataloader_train)
+            dataloader_train = iter(dataloaders[phase])
+            # for data in dataloaders[phase]: 
+            for i in range(len(dataloaders[phase])): 
+                data = next(dataloader_train)
                 start = time.time()
                 inputs, labels, _ = data
                 batch_size = inputs.shape[0]
@@ -233,16 +233,16 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     data_transforms = {
         'train': transforms.Compose([
             transforms.RandomHorizontalFlip(),
-            # transforms.Scale(224),
+            transforms.Scale(224),
             # because scale doesn't always give 224 x 224, this ensures 224 x
             # 224
-            # transforms.CenterCrop(224),
+            transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize(mean, std)
         ]),
         'val': transforms.Compose([
-            # transforms.Scale(224),
-            # transforms.CenterCrop(224),
+            transforms.Scale(224),
+            transforms.CenterCrop(224),
             transforms.ToTensor(),
             transforms.Normalize(mean, std)
         ]),
