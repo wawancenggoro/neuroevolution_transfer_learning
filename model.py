@@ -210,7 +210,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     """
     NUM_EPOCHS = 2
-    BATCH_SIZE = 64
+    BATCH_SIZE = 256
     currentDT = datetime.datetime.now()
     # try:
     #     rmtree('results/')
@@ -262,12 +262,12 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
         transformed_datasets['train'],
         batch_size=BATCH_SIZE,
         shuffle=True,
-        num_workers=2)
+        num_workers=0)
     dataloaders['val'] = torch.utils.data.DataLoader(
         transformed_datasets['val'],
         batch_size=BATCH_SIZE,
         shuffle=True,
-        num_workers=2)
+        num_workers=0)
 
     # please do not attempt to train without GPU as will take excessively long
     if not use_gpu:

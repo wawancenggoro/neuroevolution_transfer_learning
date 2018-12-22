@@ -25,7 +25,7 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
     """
 
     # calc preds in batches of 16, can reduce if your GPU has less RAM
-    BATCH_SIZE = 64
+    BATCH_SIZE = 256
 
     # set model to eval mode; required for proper predictions given use of batchnorm
     model.train(False)
@@ -36,7 +36,7 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES):
         fold="test",
         transform=data_transforms['val'])
     dataloader = torch.utils.data.DataLoader(
-        dataset, BATCH_SIZE, shuffle=False, num_workers=2)
+        dataset, BATCH_SIZE, shuffle=False, num_workers=0)
     size = len(dataset)
 
     # create empty dfs
