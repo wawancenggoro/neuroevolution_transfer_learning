@@ -281,9 +281,15 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
         i=i+1
    
     # print grad
-    # for param in model.features.parameters():
-    #     print(param.requires_grad)
+    print("MODEL")
+    print(model)
 
+    print("GRAD")
+    for param in model.features.parameters():
+        print(param.requires_grad)
+
+    import pdb
+    pdb.set_trace()
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
     # activation
