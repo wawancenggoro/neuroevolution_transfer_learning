@@ -124,7 +124,7 @@ def train_model(
                 outputs = model(inputs)
 
                 # calculate gradient and update parameters in train phase
-                optimizer.zero_grad()
+                optimizer.zero_grad().cuda()
                 loss = criterion(outputs, labels)
                 if phase == 'train':
                     loss.backward()
