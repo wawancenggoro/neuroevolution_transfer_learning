@@ -113,7 +113,7 @@ def train_model(
             total_done = 0
             # iterate over all data in train/val dataloader:
             print("train "+ str(len(dataloaders['train'])))
-            print("val" + str(len(dataloaders['val'])))
+            print("val " + str(len(dataloaders['val'])))
             for data in dataloaders[phase]:
                 start = time.time()
                 i += 1
@@ -135,7 +135,7 @@ def train_model(
                 execution = end-start
                 print(f"iteration : {i}")
                 print(f"running_loss : {running_loss}")
-                print(f"execution time per iteration : {execution}")
+                print(execution)
 
             epoch_loss = running_loss / dataset_sizes[phase]
 
