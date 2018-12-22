@@ -115,7 +115,7 @@ def train_model(
             print("train "+ str(len(dataloaders['train'])))
             print("val " + str(len(dataloaders['val'])))
             for data in dataloaders[phase]: 
-                start = time.time().cuda()
+                start = Variable(time.time().cuda()).float()
                 i += 1
                 inputs, labels, _ = data
                 batch_size = inputs.shape[0]
@@ -131,7 +131,7 @@ def train_model(
                     optimizer.step()
 
                 running_loss += loss.item() * batch_size
-                end = time.time().cuda()
+                end = Variable(time.time().cuda()).float()
                 execution = end-start
                 print(f"iteration : {i}")
                 print(f"running_loss : {running_loss}")
