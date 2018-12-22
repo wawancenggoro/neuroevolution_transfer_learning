@@ -135,9 +135,9 @@ def train_model(
                 running_loss += loss.item() * batch_size
                 end = time.time()
                 execution = end-start
-                print(f"iteration : {i}")
-                print(f"running_loss : {running_loss}")
-                print(execution)
+                # print(f"iteration : {i}")
+                # print(f"running_loss : {running_loss}")
+                # print(execution)
 
             epoch_loss = running_loss / dataset_sizes[phase]
 
