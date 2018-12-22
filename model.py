@@ -114,9 +114,10 @@ def train_model(
             # iterate over all data in train/val dataloader:
             print("train "+ str(len(dataloaders['train'])))
             print("val " + str(len(dataloaders['val'])))
-            dataloader_train = iter(dataloaders[phase])
-            for i in range(len(dataloaders[phase])): 
-                data = next(dataloader_train)
+            # dataloader_train = iter(dataloaders[phase])
+            for data in dataloaders[phase]: 
+            # for i in range(len(dataloaders[phase])): 
+                # data = next(dataloader_train)
                 start = time.time()
                 inputs, labels, _ = data
                 batch_size = inputs.shape[0]
