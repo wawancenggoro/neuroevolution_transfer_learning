@@ -287,7 +287,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     #print grad
     print("GRAD")
-    print(model.features.pool0.requires_grad)
+    print(model.features.pool0)
     for param in model.features.parameters():
         print(param.requires_grad)
 
