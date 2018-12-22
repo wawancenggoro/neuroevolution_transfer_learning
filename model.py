@@ -115,7 +115,7 @@ def train_model(
             print("train "+ str(len(dataloaders['train'])))
             print("val " + str(len(dataloaders['val'])))
             for data in dataloaders[phase]: 
-                start = Variable(time.time().cuda()).float()
+                start = time.time()
                 i += 1
                 inputs, labels, _ = data
                 batch_size = inputs.shape[0]
@@ -131,7 +131,7 @@ def train_model(
                     optimizer.step()
 
                 running_loss += loss.item() * batch_size
-                end = Variable(time.time().cuda()).float()
+                end = time.time()
                 execution = end-start
                 print(f"iteration : {i}")
                 print(f"running_loss : {running_loss}")
@@ -210,7 +210,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     """
     NUM_EPOCHS = 2
-    BATCH_SIZE = 256
+    BATCH_SIZE = 16
     currentDT = datetime.datetime.now()
     # try:
     #     rmtree('results/')
