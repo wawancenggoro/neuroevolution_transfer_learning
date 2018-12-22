@@ -280,13 +280,14 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
             param.requires_grad = False
         i=i+1
    
-    # print grad
-    print("MODEL")
-    print(model)
+    # print model
+    # print("MODEL")
+    # print(model)
 
+    #print grad
     print("GRAD")
     for param in model.features.parameters():
-        print(param.requires_grad)
+        print(param)
 
     import pdb
     pdb.set_trace()
