@@ -116,7 +116,7 @@ if __name__ == "__main__":
         def fitness(self, chromo):
             # larger is better, matched == 0
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
-            PATH_TO_IMAGES = "../images/"
+            PATH_TO_IMAGES = "../images_resized/"
             WEIGHT_DECAY = 1e-4
             print(chromo)
             NUM_LAYERS = int(round(chromo[0]*58/100))
