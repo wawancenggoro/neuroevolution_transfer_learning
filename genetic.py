@@ -118,11 +118,11 @@ if __name__ == "__main__":
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
             PATH_TO_IMAGES = "../images/"
             WEIGHT_DECAY = 1e-4
-            NUM_LAYERS = int(round(self.target[0]*58/100))
+            NUM_LAYERS = int(round(chromo[0]*58/100))
             # FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
             FREEZE_LAYERS = NUM_LAYERS-random.randint(1,3)
             LEARNING_RATE = round(random.uniform(10**-6, 0.1),6)
-            DROP_RATE = self.target[3]*1/100
+            DROP_RATE = chromo[3]*1/100
             # print("LEARNING_RATE ",LEARNING_RATE)
             # message = ("LEARNING_RATE ",LEARNING_RATE)
             # printlog.printlog(message)
