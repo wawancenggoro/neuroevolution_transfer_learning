@@ -118,6 +118,7 @@ if __name__ == "__main__":
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
             PATH_TO_IMAGES = "../images/"
             WEIGHT_DECAY = 1e-4
+            print(chromo)
             NUM_LAYERS = int(round(chromo[0]*58/100))
             # FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
             FREEZE_LAYERS = NUM_LAYERS-random.randint(1,3)
