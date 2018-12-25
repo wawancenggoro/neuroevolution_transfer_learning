@@ -343,6 +343,6 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
-        data_transforms, model, PATH_TO_IMAGES)
+        data_transforms, model, PATH_TO_IMAGES, epoch_loss)
 
     return preds, aucs, epoch_loss

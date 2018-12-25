@@ -119,11 +119,11 @@ if __name__ == "__main__":
             PATH_TO_IMAGES = "../images_resized/"
             WEIGHT_DECAY = 1e-4
             print(chromo)
-            NUM_LAYERS = int(round(chromo[0]*58/100))
+            NUM_LAYERS = chromo[0]
             # FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
-            FREEZE_LAYERS = NUM_LAYERS-random.randint(1,3)
-            LEARNING_RATE = round(random.uniform(10**-6, 0.1),6)
-            DROP_RATE = chromo[3]*1/100
+            FREEZE_LAYERS = NUM_LAYERS-chromo[1]
+            LEARNING_RATE = 10**-chromo[2]
+            DROP_RATE = chromo[3]/10
             # print("LEARNING_RATE ",LEARNING_RATE)
             # message = ("LEARNING_RATE ",LEARNING_RATE)
             # printlog.printlog(message)
@@ -203,7 +203,13 @@ if __name__ == "__main__":
             return "".join(chr(max(1, min(ch, 255))) for ch in chromo)
 
         def random_chromo(self):
-            return random.sample(range(1, 100), 4)
+            used_layers = random.sample(range(7, 58), 1)
+            unfreeze_layers = random.sample(range(1, 3), 1)
+            learning_rate = random.sample(range(1, 6), 1)
+            drop_rate = random.sample(range(1,9),1)
+
+            chromo = [used_layers[0],unfreeze_layers[0],learning_rate[0],drop_rate[0]]
+            return chromo
             # return [random.randint(1, 255) for i in range(len(self.target))]
         def roulete_wheels(choices):
             max = sum(choices.values())
