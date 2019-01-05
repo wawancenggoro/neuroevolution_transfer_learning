@@ -94,7 +94,7 @@ if __name__ == "__main__":
     class evolve(GeneticFunctions):
         def __init__(self, target_text,
                      limit=5, size=5,
-                     prob_crossover=0.9, prob_mutation=0.0):
+                     prob_crossover=0.9, prob_mutation=0.2):
             self.counter = 0
 
             self.limit = limit
@@ -181,10 +181,34 @@ if __name__ == "__main__":
             
 
         def mutation(self, chromosome):
-            index = random.randint(0, len(self.target) - 1)
-            vary = random.randint(-5, 5)
-            mutated = list(chromosome)
-            mutated[index] += vary
+            # index = random.randint(0, len(self.target) - 1)
+            # vary = random.randint(-5, 5)
+            # mutated = list(chromosome)
+            # mutated[index] += vary
+            mutated = chromosome
+            for cell in range(len(chromosome)):
+                prob = random.uniform(0.0, 1.0)
+                if prob > 0.5:
+                    if cell == 0:
+                        vary = random.randint(-5, 5)
+                        mutated[cell] += vary
+                        if mutated[cell] > 58 | mutated[cell] < 6:
+                            mutated[cell] -= vary
+                    elif cell == 1:
+                        vary = random.randint(-5, 5)
+                        mutated[cell] += vary
+                        if mutated[cell] > mutated[0]:
+                            mutated[cell] -= vary
+                    elif cell == 2:
+                        vary = random.randint(-1, 1)
+                        mutated[cell] += vary
+                        if mutated[cell] > 6 | mutated[cell] < 1:
+                            mutated[cell] -= vary
+                    elif cell == 3:
+                        vary = random.randint(-1, 1)
+                        mutated[cell] += vary
+                        if mutated[cell] > 9 | mutated[cell] < 1:
+                            mutated[cell] -= vary
             return mutated
 
         # internals
