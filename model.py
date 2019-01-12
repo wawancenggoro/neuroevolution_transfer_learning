@@ -149,9 +149,14 @@ def train_model(
 
             # decay learning rate if no val loss improvement in this epoch
 
-            if phase == 'val' and epoch_loss > best_loss:
+            # old decay learning rate
+            # if phase == 'val' and epoch_loss > best_loss:
+            #     print("decay loss from " + str(LR) + " to " +
+            #           str(LR / 10) + " as not seeing improvement in val loss")
+            #     LR = LR / 10
+            if phase == 'val' and epoch % 30 == 0:
                 print("decay loss from " + str(LR) + " to " +
-                      str(LR / 10) + " as not seeing improvement in val loss")
+                      str(LR / 10) + " at every 30 epochs")
                 LR = LR / 10
                 # create new optimizer with lower learning rate
                 optimizer = optim.SGD(
@@ -181,10 +186,11 @@ def train_model(
         if(total_done % (100 * batch_size) == 0):
             print("completed " + str(total_done) + " so far in epoch")
 
+        # old stopper
         # break if no val loss improvement in 3 epochs
-        if ((epoch - best_epoch) >= 3):
-            print("no improvement in 3 epochs, break")
-            break
+        # if ((epoch - best_epoch) >= 3):
+        #     print("no improvement in 3 epochs, break")
+        #     break
 
     time_elapsed = time.time() - since
     print('Training complete in {:.0f}m {:.0f}s'.format(
