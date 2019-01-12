@@ -11,7 +11,7 @@ import numpy as np
 import datetime
 
 
-def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss):
+def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME):
     """
     Gives predictions for test fold and calculates AUCs using previously trained model
 
@@ -108,6 +108,6 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss):
         auc_df = auc_df.append(thisrow, ignore_index=True)
 
     currentDT = datetime.datetime.now()
-    pred_df.to_csv(f"results/preds_{epoch_loss}_{currentDT}.csv", index=False)
-    auc_df.to_csv(f"results/aucs_{epoch_loss}_{currentDT}.csv", index=False)
+    pred_df.to_csv(f"results/preds_{epoch_loss}_{currentDT}_{CHROMOSOME}.csv", index=False)
+    auc_df.to_csv(f"results/aucs_{epoch_loss}_{currentDT}_{CHROMOSOME}.csv", index=False)
     return pred_df, auc_df

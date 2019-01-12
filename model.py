@@ -197,7 +197,7 @@ def train_model(
     return model, best_epoch, epoch_loss
 
 
-def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE):
+def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE, CHROMOSOME):
     """
     Train torchvision model to NIH data given high level hyperparameters.
 
@@ -343,6 +343,6 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
-        data_transforms, model, PATH_TO_IMAGES, epoch_loss)
+        data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
 
     return preds, aucs, epoch_loss

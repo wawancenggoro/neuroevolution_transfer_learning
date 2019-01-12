@@ -130,7 +130,7 @@ if __name__ == "__main__":
             # print("NUM_LAYERS ",NUM_LAYERS)
             # print("FREEZE_LAYERS ",FREEZE_LAYERS)
             # print("DROP_RATE ",DROP_RATE)
-            preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE)
+            preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE, chromo)
             # preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
             return 1 - epoch_loss
 
