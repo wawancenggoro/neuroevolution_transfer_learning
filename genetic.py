@@ -94,7 +94,7 @@ if __name__ == "__main__":
     all_population = []
     class evolve(GeneticFunctions):
         def __init__(self, target_text,
-                     limit=5, size=5,
+                     limit=10, size=5,
                      prob_crossover=0.9, prob_mutation=0.2):
             self.counter = 0
 
