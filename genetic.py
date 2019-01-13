@@ -5,7 +5,7 @@ import model as M
 import printlog as printlog
 
 class GeneticAlgorithm(object):
-    all_population = []
+    
     def __init__(self, genetics):
         self.genetics = genetics
         pass
@@ -91,6 +91,7 @@ if __name__ == "__main__":
     """
     example: Mapped guess prepared Text
     """
+    all_population = []
     class evolve(GeneticFunctions):
         def __init__(self, target_text,
                      limit=5, size=5,
