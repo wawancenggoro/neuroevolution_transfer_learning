@@ -91,7 +91,7 @@ if __name__ == "__main__":
     """
     example: Mapped guess prepared Text
     """
-    all_population = []
+    all_population = {}
     class evolve(GeneticFunctions):
         def __init__(self, target_text,
                      limit=10, size=5,
@@ -131,12 +131,15 @@ if __name__ == "__main__":
             # print("NUM_LAYERS ",NUM_LAYERS)
             # print("FREEZE_LAYERS ",FREEZE_LAYERS)
             # print("DROP_RATE ",DROP_RATE)
-            if chromo not in all_population:
+            fitness = 0
+            try:
+                fitness = all_population[chromo]
+            except:
                 preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE, chromo)
-                all_population.append(chromo)
-                return 1 - epoch_loss
+                fitness = -1 * epoch_loss
+                all_population[chromo] = fitness
             # preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
-            return 0
+            return fitness
 
         def check_stop(self, fits_populations):
             self.counter += 1
