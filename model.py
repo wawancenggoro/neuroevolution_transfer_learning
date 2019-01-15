@@ -142,6 +142,11 @@ def train_model(
             epoch_loss = running_loss / dataset_sizes[phase]
 
             if phase == 'train':
+                f= open("logs/epoch_loss.txt","a+")
+                f.write(f"{epoch} {epoch_loss}")
+                f.close()
+
+            if phase == 'train':
                 last_train_loss = epoch_loss
 
             print(phase + ' epoch {}:loss {:.4f} with data size {}'.format(
