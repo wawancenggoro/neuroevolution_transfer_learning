@@ -296,13 +296,13 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     print("=> Freezing ",FREEZE_LAYERS," layers in blocks")
 
     if FREEZE_LAYERS > 42:
-        transition = 3
+        freeze_transition = 3
     elif FREEZE_LAYERS > 18:
-        transition = 2
+        freeze_transition = 2
     elif FREEZE_LAYERS > 6:
-        transition = 1
-    elif FREEZE_LAYERS > 0:
-        transition = 0
+        freeze_transition = 1
+    elif FREEZE_LAYERS >= 0:
+        freeze_transition = 0
 
     i=0
     limit_freeze = 0
@@ -311,7 +311,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     #add freeze for freeze layers
     limit_freeze+=(FREEZE_LAYERS * 6)
     #add freeze for all transition layer that been pass through
-    limit_freeze+=(transition*3)
+    limit_freeze+=(freeze_transition*3)
     print(limit_freeze)
     for param in model.features.parameters():
         if i< limit_freeze:
