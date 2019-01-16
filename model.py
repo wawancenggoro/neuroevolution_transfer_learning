@@ -208,7 +208,7 @@ def train_model(
     return model, best_epoch, epoch_loss
 
 
-def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE, CHROMOSOME):
+def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE, CHROMOSOME, NUM_OF_EPOCHS):
     """
     Train torchvision model to NIH data given high level hyperparameters.
 
@@ -222,7 +222,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
         aucs: AUCs for each train,test tuple
 
     """
-    NUM_EPOCHS = 5
+    NUM_EPOCHS = NUM_OF_EPOCHS
     BATCH_SIZE = 16
     currentDT = datetime.datetime.now()
     # try:
