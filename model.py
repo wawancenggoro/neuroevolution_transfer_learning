@@ -184,13 +184,12 @@ def train_model(
 
 
         if phase == 'train':
-            f= open("logs/epoch_loss_train.txt","a+")
-            f.write(f"{epoch} {epoch_loss}\n")
-            f.close()
-
-        if phase == 'val':
+            fi= open("logs/epoch_loss_train.txt","a+")
+            fi.write(f"{epoch} {epoch_loss}\n")
+            fi.close()
+        elif phase == 'val':
             f= open("logs/epoch_loss_val.txt","a+")
-            f.write(f"{epoch} {epoch_loss}\n")
+            f.write(f"{epoch} {epoch_loss}\n")  
             f.close()
 
         total_done += batch_size
