@@ -183,14 +183,14 @@ def train_model(
                     logwriter.writerow([epoch, last_train_loss, epoch_loss])
 
 
-        if phase == 'train':
-            fi= open("logs/epoch_loss_train.txt","a+")
-            fi.write(f"{epoch} {epoch_loss}\n")
-            fi.close()
-        elif phase == 'val':
-            f= open("logs/epoch_loss_val.txt","a+")
-            f.write(f"{epoch} {epoch_loss}\n")  
-            f.close()
+            if phase == 'train':
+                fi= open("logs/epoch_loss_train.txt","a+")
+                fi.write(f"{epoch} {epoch_loss}\n")
+                fi.close()
+            elif phase == 'val':
+                f= open("logs/epoch_loss_val.txt","a+")
+                f.write(f"{epoch} {epoch_loss}\n")  
+                f.close()
 
         total_done += batch_size
         if(total_done % (100 * batch_size) == 0):
