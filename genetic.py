@@ -133,12 +133,13 @@ if __name__ == "__main__":
             # print("DROP_RATE ",DROP_RATE)
             NUM_OF_EPOCHS = 5
             fitness = 0
+            key = '-'.join(str(e) for e in chromo)
             try:
-                fitness = all_population[chromo]
+                fitness = all_population[key]
             except:
                 preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE, chromo, NUM_OF_EPOCHS)
                 fitness = -1 * epoch_loss
-                all_population[chromo] = fitness
+                all_population[key] = fitness
             # preds, aucs, epoch_loss = M.train_cnn(PATH_TO_IMAGES, self.target[2], WEIGHT_DECAY, self.target[0], self.target[1], self.target[3])
             return fitness
 
