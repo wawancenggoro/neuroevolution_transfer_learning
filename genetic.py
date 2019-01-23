@@ -239,7 +239,8 @@ if __name__ == "__main__":
             used_layers = random.sample(range(7, 58), 1)
             # unfreeze_layers = random.sample(range(1, 3), 1)
             # freeze_layers = used_layers[0] - unfreeze_layers[0]
-            freeze_layers = random.sample(range(1, used_layers[0]), 1)
+            freeze_layers_random = random.sample(range(1, used_layers[0]), 1)
+            freeze_layers = freeze_layers_random[0]
             learning_rate = random.sample(range(1, 6), 1)
             drop_rate = random.sample(range(1,9),1)
 
