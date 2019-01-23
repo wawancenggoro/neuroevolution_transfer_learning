@@ -77,6 +77,7 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHR
     auc_df = pd.DataFrame(columns=["label", "auc"])
 
     # calc AUCs
+    total_auc = 0.0
     for column in true_df:
 
         if column not in [
@@ -106,8 +107,10 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHR
         except BaseException:
             print("can't calculate auc for " + str(column))
         auc_df = auc_df.append(thisrow, ignore_index=True)
+        total_auc+= thisrow['auc']
 
+    avg_auc = total_auc / 14
     currentDT = datetime.datetime.now()
-    pred_df.to_csv(f"results/preds_{epoch_loss}_{currentDT}_{CHROMOSOME}.csv", index=False)
-    auc_df.to_csv(f"results/aucs_{epoch_loss}_{currentDT}_{CHROMOSOME}.csv", index=False)
+    pred_df.to_csv(f"results/preds_{epoch_loss}_{currentDT}_{CHROMOSOME}_{avg_auc}.csv", index=False)
+    auc_df.to_csv(f"results/aucs_{epoch_loss}_{currentDT}_{CHROMOSOME}_{avg_auc}.csv", index=False)
     return pred_df, auc_df
