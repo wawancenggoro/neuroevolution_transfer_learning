@@ -28,6 +28,7 @@ import csv
 
 import cxr_dataset as CXR
 import eval_model as E
+import val_model as V
 import densenet as densenet
 import datetime
 
@@ -154,6 +155,7 @@ def train_model(
             #     print("decay loss from " + str(LR) + " to " +
             #           str(LR / 10) + " as not seeing improvement in val loss")
             #     LR = LR / 10
+
             if phase == 'val' and epoch % 30 == 0:
                 print("decay loss from " + str(LR) + " to " +
                       str(LR / 10) + " at every 30 epochs")
@@ -182,14 +184,17 @@ def train_model(
                         logwriter.writerow(["epoch", "train_loss", "val_loss"])
                     logwriter.writerow([epoch, last_train_loss, epoch_loss])
 
+                    # TODO tambahin auc score buat tiap val
+                    preds, aucs = V.make_pred_multilabel(
+        data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
 
             if phase == 'train':
                 fi= open("logs/epoch_loss_train.txt","a+")
-                fi.write(f"{epoch} {epoch_loss}\n")
+                fi.write(f"{epoch},{epoch_loss}\n")
                 fi.close()
             elif phase == 'val':
                 f= open("logs/epoch_loss_val.txt","a+")
-                f.write(f"{epoch} {epoch_loss}\n")  
+                f.write(f"{epoch},{epoch_loss}\n")  
                 f.close()
 
         total_done += batch_size

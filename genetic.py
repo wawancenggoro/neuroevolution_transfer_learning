@@ -201,7 +201,7 @@ if __name__ == "__main__":
                     if cell == 0:
                         vary = random.randint(-5, 5)
                         mutated[cell] += vary
-                        if mutated[cell] > 58 | mutated[cell] < 6:
+                        if mutated[cell] > 58 or mutated[cell] < 6:
                             mutated[cell] -= vary
                     elif cell == 1:
                         vary = random.randint(-5, 5)
@@ -211,12 +211,12 @@ if __name__ == "__main__":
                     elif cell == 2:
                         vary = random.randint(-1, 1)
                         mutated[cell] += vary
-                        if mutated[cell] > 6 | mutated[cell] < 1:
+                        if mutated[cell] > 6 or mutated[cell] < 1:
                             mutated[cell] -= vary
                     elif cell == 3:
                         vary = random.randint(-1, 1)
                         mutated[cell] += vary
-                        if mutated[cell] > 9 | mutated[cell] < 1:
+                        if mutated[cell] > 9 or mutated[cell] < 1:
                             mutated[cell] -= vary
             return mutated
 
