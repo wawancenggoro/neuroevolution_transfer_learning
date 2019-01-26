@@ -73,7 +73,7 @@ def train_model(
         weight_decay,
         PATH_TO_IMAGES,
         CHROMOSOME,
-        datatransforms):
+        data_transforms):
     """
     Fine tunes torchvision model to NIH CXR data.
 
@@ -188,8 +188,6 @@ def train_model(
                     logwriter.writerow([epoch, last_train_loss, epoch_loss])
 
                     # TODO tambahin auc score buat tiap val
-                    checkpoint_best = torch.load('results/checkpoint')
-                    model = checkpoint_best['model']
                     preds, aucs = V.make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
 
             if phase == 'train':
@@ -365,7 +363,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     # train model
     model, best_epoch, epoch_loss = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
                                     dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY,
-                                     PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, datatransforms = data_transforms)
+                                     PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
