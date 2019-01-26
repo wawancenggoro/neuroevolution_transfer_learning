@@ -156,6 +156,15 @@ if __name__ == "__main__":
                 "[G %3d] score=(%4f, %4f, %4f): %r" %
                 (self.counter, best, ave, worst,
                  self.fitness))
+
+            fits_populations.sort(key=lambda tup: tup[0], reverse = True)
+            fittest_fitness = fits_populations[0][0] * -1
+            fittest_chromosom = fits_populations[0][1]
+
+            fi= open("results/best_population.txt","a+")
+                fi.write(f"{self.counter},{fittest_fitness},{fittest_chromosom}\n")
+                fi.close()
+
             # pass
             return self.counter >= self.limit
 
