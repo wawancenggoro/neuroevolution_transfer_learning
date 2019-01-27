@@ -162,8 +162,8 @@ if __name__ == "__main__":
             fittest_chromosom = fits_populations[0][1]
 
             fi= open("results/best_population.txt","a+")
-                fi.write(f"{self.counter},{fittest_fitness},{fittest_chromosom}\n")
-                fi.close()
+            fi.write(f"{self.counter},{fittest_fitness},{fittest_chromosom}\n")
+            fi.close()
 
             # pass
             return self.counter >= self.limit
