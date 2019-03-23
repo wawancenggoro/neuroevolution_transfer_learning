@@ -124,8 +124,8 @@ def train_model(
             for i in range(len(dataloaders[phase])): 
                 start = time.time()
                 data = next(dataloader_train)
-                print("image", data.size())
                 inputs, labels, _ = data
+                print("image", inputs.size())
                 batch_size = inputs.shape[0]
                 inputs = Variable(inputs.cuda())
                 labels = Variable(labels.cuda()).float()
