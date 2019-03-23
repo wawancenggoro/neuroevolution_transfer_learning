@@ -375,7 +375,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     for x in range(64):
         # image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
         # writer.add_image('Image', image, x)
-        img = Image.fromarray(weight[x], 'RGB')
+        img = Image.fromarray(weight[x].get_shape(), 'RGB')
         img.save('images/',x,'.png')
 
     # get preds and AUCs on test fold
