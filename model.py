@@ -33,6 +33,7 @@ import eval_model as E
 import val_model as V
 import densenet as densenet
 import datetime
+import torchvision.transforms.functional as F
 
 use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
@@ -374,9 +375,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     for x in range(64):
         # image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
         # writer.add_image('Image', image, x)
-        print(weight[x].size())
-        image = round((weight[x] + 1) * 255 / 2)*127.5
-        img = Image.fromarray(image, 'RGB')
+        img = F.to_pil_image(weight[x])
         img.save('images/',x,'.png')
 
     # get preds and AUCs on test fold
