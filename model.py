@@ -376,6 +376,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
         # image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
         # writer.add_image('Image', image, x)
         image_array = np.asarray(weight[x])
+        print(image_array)
         img = Image.fromarray(image_array)
         img.save('images/',x,'.png')
 
