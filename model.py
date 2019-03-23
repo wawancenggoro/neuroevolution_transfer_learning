@@ -235,7 +235,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     """
     NUM_EPOCHS = NUM_OF_EPOCHS
-    BATCH_SIZE = 16
+    BATCH_SIZE = 8
     currentDT = datetime.datetime.now()
     # try:
     #     rmtree('results/')

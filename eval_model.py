@@ -25,7 +25,7 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHR
     """
 
     # calc preds in batches of 16, can reduce if your GPU has less RAM
-    BATCH_SIZE = 16
+    BATCH_SIZE = 8
 
     # set model to eval mode; required for proper predictions given use of batchnorm
     model.train(False)
