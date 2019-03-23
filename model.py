@@ -208,7 +208,7 @@ def train_model(
             # image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
             # writer.add_image('Image', image, x)
             img = to_pil_image(weight[x].cpu())
-            image_path = 'images/'+epoch+'/'+str(x)+'.png'
+            image_path = 'images/'+str(epoch)+'/'+str(x)+'.png'
             img.save(image_path)
 
         total_done += batch_size
