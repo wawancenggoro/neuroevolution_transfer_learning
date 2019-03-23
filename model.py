@@ -367,7 +367,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
                                      PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms)
 
     weight = model.features.conv0.weight
-    print("ROW ",len(weight)," COL ", len(weight[0]))
+    print("size ",weight.size())
 
     writer = SummaryWriter()
     writer.add_image('Image', weight, NUM_EPOCHS)
