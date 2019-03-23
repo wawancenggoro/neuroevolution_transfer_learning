@@ -11,6 +11,7 @@ from torchvision import datasets, models, transforms
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
 from tensorboardX import SummaryWriter
+import torchvision.utils as vutils
 
 # image imports
 from skimage import io, transform
@@ -372,7 +373,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     writer = SummaryWriter()
     for x in range(64):
-        writer.add_image('Image', weight[x], x, normalize=True, scale_each=True)
+        image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
+        writer.add_image('Image', image, x)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
