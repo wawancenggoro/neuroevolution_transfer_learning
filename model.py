@@ -371,8 +371,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     print("size ",weight.size())
 
     writer = SummaryWriter()
-    for weight_per_kernell in weight
-        writer.add_image('Image', weight_per_kernell, NUM_EPOCHS)
+    for x in range(64):
+        writer.add_image('Image', weight[x], x)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
