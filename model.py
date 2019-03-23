@@ -368,10 +368,11 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
                                      PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms)
 
     weight = model.features.conv0.weight
-    print("size ",weight[0])
+    print("size ",weight.size())
 
     writer = SummaryWriter()
-    writer.add_image('Image', weight[0], NUM_EPOCHS)
+    for weight_per_kernell in weight
+        writer.add_image('Image', weight_per_kernell, NUM_EPOCHS)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
