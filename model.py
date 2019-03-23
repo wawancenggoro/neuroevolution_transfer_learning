@@ -372,7 +372,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     writer = SummaryWriter()
     for x in range(64):
-        writer.add_image('Image', weight[x], x)
+        writer.add_image('Image', weight[x], x, normalize=True, scale_each=True)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
