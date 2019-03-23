@@ -236,7 +236,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     """
     NUM_EPOCHS = NUM_OF_EPOCHS
-    BATCH_SIZE = 4
+    BATCH_SIZE = 16
     currentDT = datetime.datetime.now()
     # try:
     #     rmtree('results/')
@@ -366,8 +366,11 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
                                     dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY,
                                      PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms)
 
+    weight = model.features.conv0.weight
+    print("ROW ",len(weight)," COL ", len(weight[0]))
+
     writer = SummaryWriter()
-    writer.add_image('Image', model.features.conv0.weight, NUM_EPOCHS)
+    writer.add_image('Image', weight, NUM_EPOCHS)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
