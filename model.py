@@ -250,7 +250,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     N_LABELS = 14  # we are predicting 14 labels
 
     # load labels
-    df = pd.read_csv("nih_labels.csv", index_col=0)
+    df = pd.read_csv("nih_labels2.csv", index_col=0)
 
     # define torchvision transforms
     data_transforms = {
@@ -364,6 +364,9 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     model, best_epoch, epoch_loss = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
                                     dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY,
                                      PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms)
+
+    print("Weight first conv layers after training")
+    print(model.features.conv0.weight)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
