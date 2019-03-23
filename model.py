@@ -10,6 +10,7 @@ import torchvision
 from torchvision import datasets, models, transforms
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
+from tensorboardX import SummaryWriter
 
 # image imports
 from skimage import io, transform
@@ -365,8 +366,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
                                     dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY,
                                      PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms)
 
-    print("Weight first conv layers after training")
-    print(model.features.conv0.weight)
+    writer = SummaryWriter()
+    writer.add_image('Image', model.features.conv0.weight, NUM_EPOCHS)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
