@@ -305,7 +305,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     print("=> Use ",NUM_LAYERS," layers in blocks")
 
     model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS, drop_rate=DROP_RATE)
-    model.load_state_dict(torch.load("/pretrained/checkpoint"))
+    model.load_state_dict(torch.load("pretrained/checkpoint"))
     
     #freezing layers
     print("=> Freezing ",FREEZE_LAYERS," layers in blocks")
