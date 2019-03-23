@@ -126,7 +126,6 @@ def train_model(
                 start = time.time()
                 data = next(dataloader_train)
                 inputs, labels, _ = data
-                print("image", inputs.size())
                 batch_size = inputs.shape[0]
                 inputs = Variable(inputs.cuda())
                 labels = Variable(labels.cuda()).float()
@@ -375,9 +374,9 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     for x in range(64):
         # image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
         # writer.add_image('Image', image, x)
-        image_array = np.asarray(weight[x])
-        print(image_array)
-        img = Image.fromarray(image_array)
+        print(weight[x].size())
+        image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
+        img = Image.fromarray(image, 'RGB')
         img.save('images/',x,'.png')
 
     # get preds and AUCs on test fold
