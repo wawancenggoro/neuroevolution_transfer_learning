@@ -190,7 +190,7 @@ def train_model(
                     logwriter.writerow([epoch, last_train_loss, epoch_loss])
 
                     # TODO tambahin auc score buat tiap val
-                    preds, aucs = V.make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
+                    # preds, aucs = V.make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
 
             if phase == 'train':
                 fi= open(f"logs/epoch_loss_train_{CHROMOSOME}.txt","a+")
@@ -247,7 +247,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     """
     NUM_EPOCHS = NUM_OF_EPOCHS
-    BATCH_SIZE = 4
+    BATCH_SIZE = 16
     currentDT = datetime.datetime.now()
     # try:
     #     rmtree('results/')
