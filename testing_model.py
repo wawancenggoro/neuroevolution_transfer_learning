@@ -42,6 +42,18 @@ FREEZE_LAYERS = 0
 DROP_RATE = 0.0
 chromosome = [58, 0, 2, 0]
 NUM_OF_EPOCHS = 100
+BATCH_SIZE = 16
+currentDT = datetime.datetime.now()
+# try:
+#     rmtree('results/')
+# except BaseException:
+#     pass  # directory doesn't yet exist, no need to clear it
+# os.makedirs("results/")
+
+# use imagenet mean,std for normalization
+mean = [0.485, 0.456, 0.406]
+std = [0.229, 0.224, 0.225]
+
 
 data_transforms = {
     'train': transforms.Compose([
