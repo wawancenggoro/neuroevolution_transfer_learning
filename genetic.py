@@ -214,9 +214,12 @@ if __name__ == "__main__":
                             mutated[cell] -= vary
                     elif cell == 1:
                         vary = random.randint(-5, 5)
+                        old_data = mutated[cell]
                         mutated[cell] += vary
                         if mutated[cell] > mutated[0]:
-                            mutated[cell] -= vary
+                            mutated[cell] = old_data
+                        if mutated[cell] > 10:
+                            mutated[cell] = old_data
                     elif cell == 2:
                         vary = random.randint(-1, 1)
                         mutated[cell] += vary
@@ -248,7 +251,7 @@ if __name__ == "__main__":
             used_layers = random.sample(range(7, 58), 1)
             # unfreeze_layers = random.sample(range(1, 3), 1)
             # freeze_layers = used_layers[0] - unfreeze_layers[0]
-            freeze_layers_random = random.sample(range(1, used_layers[0]), 1)
+            freeze_layers_random = random.sample(range(1, 10), 1)
             freeze_layers = freeze_layers_random[0]
             learning_rate = random.sample(range(1, 6), 1)
             drop_rate = random.sample(range(1,9),1)
