@@ -101,6 +101,7 @@ checkpoint_best = torch.load('results/checkpoint')
 model = checkpoint_best['model']
 epoch_loss = 0.02
 
+print(model)
 # get preds and AUCs on test fold
-preds, aucs = E.make_pred_multilabel(
-    data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
+# preds, aucs = E.make_pred_multilabel(
+    # data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
