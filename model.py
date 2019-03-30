@@ -330,13 +330,13 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
 
     i=0
     limit_freeze = 0
-    #add freeze for first convolution
-    limit_freeze+=3 
     #add freeze for freeze layers
     limit_freeze+=(FREEZE_LAYERS * 6)
     #add freeze for all transition layer that been pass through
     limit_freeze+=(freeze_transition*3)
-    limit_freeze = 0
+    #add freeze for first convolution
+    if limit_freeze > 0:
+        limit_freeze+=3 
     print(limit_freeze)
     for param in model.features.parameters():
         if i< limit_freeze:
@@ -371,6 +371,13 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
         lr=LR,
         momentum=0.9,
         weight_decay=WEIGHT_DECAY)
+    # optimizer = optim.Adadelta(
+    #     filter(
+    #         lambda p: p.requires_grad,
+    #         model.parameters()),
+    #     lr=LR,
+    #     weight_decay=WEIGHT_DECAY)
+
     dataset_sizes = {x: len(transformed_datasets[x]) for x in ['train', 'val']}
 
     # train model
