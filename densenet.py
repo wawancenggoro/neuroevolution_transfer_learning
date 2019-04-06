@@ -220,7 +220,7 @@ class DenseNet(nn.Module):
     """
 
     def __init__(self, growth_rate=32, block_config=(6, 12, 24, 16),
-                 num_init_features=64, bn_size=4, drop_rate=0, num_classes=1000,num_blocks=4):
+                 num_init_features=64, bn_size=4, drop_rate=0, num_classes=1000,num_blocks=4, curr_layer = 0):
 
         super(DenseNet, self).__init__()
         self.num_blocks = num_blocks
