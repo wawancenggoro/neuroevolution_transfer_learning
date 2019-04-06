@@ -218,7 +218,7 @@ class _Transition(nn.Sequential):
 class _SEBlock(nn.Sequential):
     def __init__(self, in_block, ch, ratio = 16):
         super(_SEBlock, self).__init__()
-        self.add_module('norm', nn.AvgPool2d(kernel_size=in_block // 2 ))
+        self.add_module('norm', nn.AvgPool2d(kernel_size=in_block))
         self.add_module('fc1', nn.Linear(ch,ch//ratio, bias = True))
         self.add_module('relu', nn.ReLU(inplace=True))
         self.add_module('fc2', nn.Linear(ch//ratio, ch,bias = True))
@@ -265,10 +265,10 @@ class DenseNet(nn.Module):
             if i != len(block_config) - 1:
                 trans = _Transition(num_input_features=num_features, num_output_features=num_features // 2)
                 self.features.add_module('transition%d' % (i + 1), trans)
+                num_features = num_features // 2
                 seBlock = _SEBlock(ch=num_features, in_block = wHBlock*7)
                 self.features.add_module('sEBlock%d' % (i + 1), seBlock)
                 wHBlock = wHBlock // 2 
-                num_features = num_features // 2
 
         self.num_features = num_features
         # Final batch norm
