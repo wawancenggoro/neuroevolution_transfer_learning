@@ -224,6 +224,7 @@ class DenseNet(nn.Module):
 
         super(DenseNet, self).__init__()
         self.num_blocks = num_blocks
+        self.curr_layer = curr_layer
         # First convolution
         self.features = nn.Sequential(OrderedDict([
             ('conv0', nn.Conv2d(3, num_init_features, kernel_size=7, stride=2, padding=3, bias=False)),
