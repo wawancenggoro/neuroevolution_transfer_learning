@@ -39,7 +39,7 @@ def densenet121(pretrained=False, num_layers = 0, drop_rate = 0, **kwargs):
         num_blocks = 1
 
 
-    model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config, drop_rate=drop_rate,num_blocks=num_blocks,
+    model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config, drop_rate=drop_rate,num_blocks=num_blocks,curr_layer = 0,
                      **kwargs)
     if pretrained:
         # '.'s are no longer allowed in module names, but pervious _DenseLayer
@@ -196,6 +196,15 @@ class _Transition(nn.Sequential):
                                           kernel_size=1, stride=1, bias=False))
         self.add_module('pool', nn.AvgPool2d(kernel_size=2, stride=2))
 
+# class _SEBlock(nn.Sequential):
+#     def __init__(self, in_block, ch, ratio = 16):
+#         super(_SEBlock, self).__init__()
+#         self.add_module('norm', nn.AvgPool2d(in_block))
+#         self.add_module('fc1'), nn.Linear(ch//ratio))
+#         self.add_module('relu', nn.ReLU(inplace=True))
+#         self.add_module('fc2'), nn.Linear(ch))
+#         self.add_module('sigmoid', nn.Sigmoid())
+
 
 class DenseNet(nn.Module):
     r"""Densenet-BC model class, based on
@@ -231,9 +240,13 @@ class DenseNet(nn.Module):
                                 bn_size=bn_size, growth_rate=growth_rate, drop_rate=drop_rate)
             self.features.add_module('denseblock%d' % (i + 1), block)
             num_features = num_features + num_layers * growth_rate
+            # wHBlock = 8
             if i != len(block_config) - 1:
                 trans = _Transition(num_input_features=num_features, num_output_features=num_features // 2)
                 self.features.add_module('transition%d' % (i + 1), trans)
+                # seBlock = _SEBlock(ch=num_features, in_block = wHBlock*7)
+                # self.features.add_module('sEBlock%d' % (i + 1), seBlock)
+                # wHBlock = wHBlock // 2 
                 num_features = num_features // 2
 
         self.num_features = num_features
@@ -258,4 +271,6 @@ class DenseNet(nn.Module):
         out = F.relu(features, inplace=True)
         out = F.avg_pool2d(out, kernel_size=7*(2**(4-self.num_blocks)), stride=1).view(features.size(0), -1)
         out = self.classifier(out)
+        print("Current layer : ",self.curr_layer," ")
+        self.curr_layer = self.curr_layer + 1
         return out
