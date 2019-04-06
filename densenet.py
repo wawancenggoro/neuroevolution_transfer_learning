@@ -223,6 +223,8 @@ class _SEBlock(nn.Sequential):
         self.add_module('relu', nn.ReLU(inplace=True))
         self.add_module('fc2', nn.Linear(ch//ratio, ch,bias = True))
         self.add_module('sigmoid', nn.Sigmoid())
+        import pdb
+        pdb.set_trace()
 
 
 class DenseNet(nn.Module):
