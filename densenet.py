@@ -39,7 +39,7 @@ def densenet121(pretrained=False, num_layers = 0, drop_rate = 0, **kwargs):
         num_blocks = 1
 
 
-    model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config, drop_rate=drop_rate,num_blocks=num_blocks,curr_layer = 0,
+    model = DenseNet(num_init_features=64, growth_rate=32, block_config=block_config, drop_rate=drop_rate,num_blocks=num_blocks,
                      **kwargs)
     if pretrained:
         # '.'s are no longer allowed in module names, but pervious _DenseLayer
