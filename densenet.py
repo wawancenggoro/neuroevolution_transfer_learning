@@ -224,7 +224,7 @@ class _SEBlock(nn.Sequential):
         self.add_module('relu', nn.ReLU(inplace=True))
         self.add_module('fc2', nn.Linear(ch//ratio, ch,bias = True))
         x=self.add_module('sigmoid', nn.Sigmoid())
-        self.add_module('multi',nn.functional.upsample(x,scale_factor=in_block))
+        self.add_module('multi',nn.functional.upsample(x,size=[in_block,in_block,ch],scale_factor=in_block))
 
 
 class DenseNet(nn.Module):
