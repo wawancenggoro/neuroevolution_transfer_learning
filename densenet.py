@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.model_zoo as model_zoo
 from collections import OrderedDict
-import tensorflow as tf
+import torchvision as tv
 
 __all__ = ['DenseNet', 'densenet121', 'densenet169', 'densenet201', 'densenet161']
 
@@ -224,7 +224,7 @@ class _SEBlock(nn.Sequential):
         self.add_module('relu', nn.ReLU(inplace=True))
         self.add_module('fc2', nn.Linear(ch//ratio, ch,bias = True))
         self.add_module('sigmoid', nn.Sigmoid())
-        self.add_module('multi', tf.keras.layers.multiply(in_block))
+        self.add_module('multi',tv.transforms.Resize(1, interpolation=in_block))
 
 
 class DenseNet(nn.Module):
