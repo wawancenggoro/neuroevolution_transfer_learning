@@ -218,7 +218,9 @@ class _Transition(nn.Sequential):
 class _SEBlock(nn.Sequential):
     def __init__(self, in_block, ch, ratio = 16):
         super(_SEBlock, self).__init__()
-        self.add_module('norm', nn.AvgPool2d(kernel_size=in_block))
+        import pdb
+        pdb.set_trace()
+        self.add_module('norm', nn.AvgPool2d(kernel_size=2, stride=2))
         self.add_module('fc1', nn.Linear(ch,ch//ratio, bias = True))
         self.add_module('relu', nn.ReLU(inplace=True))
         self.add_module('fc2', nn.Linear(ch//ratio, ch,bias = True))
