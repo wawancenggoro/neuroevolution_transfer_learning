@@ -227,7 +227,7 @@ class _SEBlock(nn.Sequential):
     #     self.add_module('multi',nn.functional.interpolate(in_block//in_block,size=[in_block,in_block,ch]))
 
     def __init__(self, in_ch, r=16):
-        super(SE, self).__init__()
+        super(SEBlock, self).__init__()
 
         self.linear_1 = nn.Linear(in_ch, in_ch//r)
         self.linear_2 = nn.Linear(in_ch//r, in_ch)
