@@ -236,7 +236,7 @@ class _SEBlock(nn.Module):
         input_x = x
 
         x = x.view(*(x.shape[:-2]),-1).mean(-1)
-        x = functional.relu(self.linear_1(x), inplace=True)
+        x = F.relu(self.linear_1(x), inplace=True)
         x = self.linear_2(x)
         x = x.unsqueeze(-1).unsqueeze(-1)
         x = torch.sigmoid(x)
