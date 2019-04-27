@@ -242,7 +242,7 @@ class _SEBlock(nn.Module):
         x = torch.sigmoid(x)
 
         x = torch.mul(input_x, x)
-
+        print("masuk")
         return x 
 
 
