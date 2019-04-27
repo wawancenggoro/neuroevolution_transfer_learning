@@ -18,14 +18,14 @@ def make_pred_multilabel(data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHR
     Args:
         data_transforms: torchvision transforms to preprocess raw images; same as validation transforms
         model: densenet-121 from torchvision previously fine tuned to training data
-        PATH_TO_IMAGES: path at which NIH images can be found
+        PATH_TO_IMAGES: path at which NIH imagescan be found
     Returns:
         pred_df: dataframe containing individual predictions and ground truth for each test image
         auc_df: dataframe containing aggregate AUCs by train/test tuples
     """
 
     # calc preds in batches of 16, can reduce if your GPU has less RAM
-    BATCH_SIZE = 4
+    BATCH_SIZE = 8
 
     # set model to eval mode; required for proper predictions given use of batchnorm
     model.train(False)
