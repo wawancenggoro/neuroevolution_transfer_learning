@@ -216,7 +216,7 @@ class _Transition(nn.Sequential):
                                           kernel_size=1, stride=1, bias=False))
         self.add_module('pool', nn.AvgPool2d(kernel_size=2, stride=2))
 
-class _SEBlock(nn.Sequential):
+class _SEBlock(nn.Module):
     # def __init__(self, in_block, ch, ratio = 16):
     #     super(_SEBlock, self).__init__()
     #     self.add_module('norm', nn.AvgPool2d(kernel_size=in_block))
