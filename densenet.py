@@ -217,14 +217,33 @@ class _Transition(nn.Sequential):
         self.add_module('pool', nn.AvgPool2d(kernel_size=2, stride=2))
 
 class _SEBlock(nn.Sequential):
-    def __init__(self, in_block, ch, ratio = 16):
-        super(_SEBlock, self).__init__()
-        self.add_module('norm', nn.AvgPool2d(kernel_size=in_block))
-        self.add_module('fc1', nn.Linear(ch,ch//ratio, bias = True))
-        self.add_module('relu', nn.ReLU(inplace=True))
-        self.add_module('fc2', nn.Linear(ch//ratio, ch,bias = True))
-        self.add_module('sigmoid', nn.Sigmoid())
-        self.add_module('multi',nn.functional.interpolate(in_block//in_block,size=[in_block,in_block,ch]))
+    # def __init__(self, in_block, ch, ratio = 16):
+    #     super(_SEBlock, self).__init__()
+    #     self.add_module('norm', nn.AvgPool2d(kernel_size=in_block))
+    #     self.add_module('fc1', nn.Linear(ch,ch//ratio, bias = True))
+    #     self.add_module('relu', nn.ReLU(inplace=True))
+    #     self.add_module('fc2', nn.Linear(ch//ratio, ch,bias = True))
+    #     self.add_module('sigmoid', nn.Sigmoid())
+    #     self.add_module('multi',nn.functional.interpolate(in_block//in_block,size=[in_block,in_block,ch]))
+
+    def __init__(self, in_ch, r=16):
+        super(SE, self).__init__()
+
+        self.linear_1 = nn.Linear(in_ch, in_ch//r)
+        self.linear_2 = nn.Linear(in_ch//r, in_ch)
+
+    def forward(self,x):
+        input_x = x
+
+        x = x.view(*(x.shape[:-2]),-1).mean(-1)
+        x = functional.relu(self.linear_1(x), inplace=True)
+        x = self.linear_2(x)
+        x = x.unsqueeze(-1).unsqueeze(-1)
+        x = torch.sigmoid(x)
+
+        x = torch.mul(input_x, x)
+
+        return x 
 
 
 class DenseNet(nn.Module):
@@ -274,7 +293,7 @@ class DenseNet(nn.Module):
         # Final batch norm
         # self.features.add_module('norm5', nn.BatchNorm2d(num_features))
 
-        # # Linear layer
+        # # Linear layer 
         # self.classifier = nn.Linear(num_features, num_classes)
 
         # Official init from torch repo.
@@ -289,6 +308,7 @@ class DenseNet(nn.Module):
 
     def forward(self, x):
         features = self.features(x)
+        
         out = F.relu(features, inplace=True)
         out = F.avg_pool2d(out, kernel_size=7*(2**(4-self.num_blocks)), stride=1).view(features.size(0), -1)
         out = self.classifier(out)
