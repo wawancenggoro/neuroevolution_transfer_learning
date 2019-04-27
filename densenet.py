@@ -312,4 +312,5 @@ class DenseNet(nn.Module):
         out = F.relu(features, inplace=True)
         out = F.avg_pool2d(out, kernel_size=7*(2**(4-self.num_blocks)), stride=1).view(features.size(0), -1)
         out = self.classifier(out)
+        print("===========================================================================================")
         return out
