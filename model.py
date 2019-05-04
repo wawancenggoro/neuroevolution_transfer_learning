@@ -342,19 +342,21 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
         if i< limit_freeze:
             # print(name)
             if("sEBlock" in name):
-                print(name)
-            param.requires_grad = False
-        i=i+1
+                print("skipping layer : "+name)
+            else:
+                param.requires_grad = False
+                i=i+1
    
     # print model
     # print("MODEL")
     # print(model)
 
     #print grad
-    # print("GRAD")
+    print("GRAD")
     # print(model.features.pool0)
-    # for param in model.features.parameters():
-    #     print(param.requires_grad)
+    for name,param in model.named_parameters():
+        print (name)
+        print(param.requires_grad)
 
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
