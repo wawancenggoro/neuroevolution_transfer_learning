@@ -338,9 +338,9 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     if limit_freeze > 0:
         limit_freeze+=3 
     print(limit_freeze)
-    print(model)
     for param in model.features.parameters():
         if i< limit_freeze:
+            print(param.name)
             param.requires_grad = False
         i=i+1
    
