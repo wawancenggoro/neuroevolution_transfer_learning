@@ -340,7 +340,9 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     print(limit_freeze)
     for name, param in model.named_parameters():
         if i< limit_freeze:
-            print(name)
+            # print(name)
+            if(name.contains("sEBlock")):
+                print(name)
             param.requires_grad = False
         i=i+1
    
