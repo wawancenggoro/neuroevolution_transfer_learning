@@ -3,7 +3,7 @@ from csv import reader
 from dateutil import parser
 import pdb
 
-with open('logs/epoch_loss_train_2.txt', 'r') as f:
+with open('logs/epoch_loss_train.txt', 'r') as f:
     data = list(reader(f))
 
 epoch_loss = [float(i[1]) for i in data]
