@@ -201,15 +201,16 @@ def train_model(
                 f.write(f"{epoch},{epoch_loss}\n")  
                 f.close()
 
-        weight = model.features.conv0.weight
-        to_pil_image = transforms.ToPILImage()
-        # writer = SummaryWriter()
-        for x in range(64):
-            # image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
-            # writer.add_image('Image', image, x)
-            img = to_pil_image(weight[x].cpu())
-            image_path = 'images/'+str(epoch)+'/'+str(x)+'.png'
-            img.save(image_path)
+        # weight = model.features.conv0.weight
+        # to_pil_image = transforms.ToPILImage()
+        # # writer = SummaryWriter()
+        # #TODO print image convolve 1
+        # for x in range(64):
+        #     # image = vutils.make_grid(weight[x], normalize=True, scale_each=True)
+        #     # writer.add_image('Image', image, x)
+        #     img = to_pil_image(weight[x].cpu())
+        #     image_path = 'images/'+str(epoch)+'/'+str(x)+'.png'
+        #     img.save(image_path)
 
         total_done += batch_size
         if(total_done % (100 * batch_size) == 0):
