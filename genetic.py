@@ -4,7 +4,7 @@ import model as M
 
 import printlog as printlog
 
-
+date = datetime.date.today()
 f = open(f"logs/output-genetic-{date}.txt", "a+")
 class GeneticAlgorithm(object):
     
