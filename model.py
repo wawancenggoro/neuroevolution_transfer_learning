@@ -37,7 +37,7 @@ import datetime
 use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
 date = datetime.date.today()
-f = open(f"output-{date}.txt", "a+")
+f = open(f"logs/output-{date}.txt", "a+")
 print("Available GPU count:" + str(gpu_count),file=f)
 
 
