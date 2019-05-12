@@ -36,7 +36,9 @@ import datetime
 
 use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
-print("Available GPU count:" + str(gpu_count))
+date = datetime.date.today()
+f = open(f"output-{date}.txt", "a+")
+print("Available GPU count:" + str(gpu_count),file=f)
 
 
 def checkpoint(model, best_loss, epoch, LR):
@@ -52,7 +54,7 @@ def checkpoint(model, best_loss, epoch, LR):
         None
     """
 
-    print('saving')
+    print('saving',file=f)
     state = {
         'model': model,
         'best_loss': best_loss,
