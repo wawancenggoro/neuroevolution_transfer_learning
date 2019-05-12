@@ -77,7 +77,8 @@ def train_model(
         weight_decay,
         PATH_TO_IMAGES,
         CHROMOSOME,
-        data_transforms):
+        data_transforms,
+        f):
     """
     Fine tunes torchvision model to NIH CXR data.
 
@@ -391,7 +392,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     # train model
     model, best_epoch, epoch_loss = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
                                     dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY,
-                                     PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms)
+                                     PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms,f=f)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
