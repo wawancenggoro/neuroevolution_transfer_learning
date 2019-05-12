@@ -3,6 +3,7 @@ import time
 import model as M
 
 import printlog as printlog
+import datetime
 
 date = datetime.date.today()
 f = open(f"logs/output-genetic-{date}.txt", "a+")
