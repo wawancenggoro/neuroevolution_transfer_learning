@@ -4,6 +4,8 @@ import model as M
 
 import printlog as printlog
 
+
+f = open(f"logs/output-genetic-{date}.txt", "a+")
 class GeneticAlgorithm(object):
     
     def __init__(self, genetics):
@@ -12,7 +14,7 @@ class GeneticAlgorithm(object):
 
     def run(self):
         population = self.genetics.initial()
-        print("population ",population)
+        print("population ",population,file=f)
         counter = 0
         while True:
             self.genetics.target = population[counter]
@@ -119,18 +121,18 @@ if __name__ == "__main__":
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
             PATH_TO_IMAGES = "../images_resized/"
             WEIGHT_DECAY = 1e-4
-            print(chromo)
+            print(chromo,file=f)
             NUM_LAYERS = chromo[0]
             # FREEZE_LAYERS = int(round(self.target[1]*NUM_LAYERS/100))
             FREEZE_LAYERS = chromo[1]
             LEARNING_RATE = 10**-chromo[2]
             DROP_RATE = chromo[3]/10
-            # print("LEARNING_RATE ",LEARNING_RATE)
+            # print("LEARNING_RATE ",LEARNING_RATE,file=f)
             # message = ("LEARNING_RATE ",LEARNING_RATE)
             # printlog.printlog(message)
-            # print("NUM_LAYERS ",NUM_LAYERS)
-            # print("FREEZE_LAYERS ",FREEZE_LAYERS)
-            # print("DROP_RATE ",DROP_RATE)
+            # print("NUM_LAYERS ",NUM_LAYERS,file=f)
+            # print("FREEZE_LAYERS ",FREEZE_LAYERS,file=f)
+            # print("DROP_RATE ",DROP_RATE,file=f)
             NUM_OF_EPOCHS = 5
             fitness = 0
             key = '-'.join(str(e) for e in chromo)
@@ -146,7 +148,7 @@ if __name__ == "__main__":
         def check_stop(self, fits_populations):
             self.counter += 1
             # if self.counter % 10 == 0:
-            print("fitness and population : ",fits_populations)
+            print("fitness and population : ",fits_populations,file=f)
             best_match = list(sorted(fits_populations))[-1][1]
             fits = [f for f, ch in fits_populations]
             best = max(fits)
@@ -155,7 +157,7 @@ if __name__ == "__main__":
             print(
                 "[G %3d] score=(%4f, %4f, %4f): %r" %
                 (self.counter, best, ave, worst,
-                 self.fitness))
+                 self.fitness),file=f)
 
             fits_populations.sort(key=lambda tup: tup[0], reverse = True)
             fittest_fitness = fits_populations[0][0] * -1

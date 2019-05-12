@@ -37,7 +37,7 @@ import datetime
 use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
 date = datetime.date.today()
-f = open(f"logs/output-{date}.txt", "a+")
+f = open(f"logs/output-retrain-{date}.txt", "a+")
 print("Available GPU count:" + str(gpu_count),file=f)
 
 
@@ -104,8 +104,8 @@ def train_model(
 
     # iterate over epochs
     for epoch in range(start_epoch, num_epochs + 1):
-        print('Epoch {}/{}'.format(epoch, num_epochs))
-        print('-' * 10)
+        print('Epoch {}/{}'.format(epoch, num_epochs),file=f)
+        print('-' * 10,file=f)
 
         # set model to train or eval mode based on whether we are in train or
         # val; necessary to get correct predictions given batchnorm
@@ -120,8 +120,8 @@ def train_model(
             i = 0
             total_done = 0
             # iterate over all data in train/val dataloader:
-            print("train "+ str(len(dataloaders['train'])))
-            print("val " + str(len(dataloaders['val'])))
+            print("train "+ str(len(dataloaders['train'])),file=f)
+            print("val " + str(len(dataloaders['val'])),file=f)
             dataloader_train = iter(dataloaders[phase])
             # for data in dataloaders[phase]: 
             for i in range(len(dataloaders[phase])): 
@@ -153,7 +153,7 @@ def train_model(
                 last_train_loss = epoch_loss
 
             print(phase + ' epoch {}:loss {:.4f} with data size {}'.format(
-                epoch, epoch_loss, dataset_sizes[phase]))
+                epoch, epoch_loss, dataset_sizes[phase]),file=f)
 
             # decay learning rate if no val loss improvement in this epoch
 
@@ -165,7 +165,7 @@ def train_model(
 
             if phase == 'val' and epoch % 30 == 0:
                 print("decay loss from " + str(LR) + " to " +
-                      str(LR / 10) + " at every 30 epochs")
+                      str(LR / 10) + " at every 30 epochs",file=f)
                 LR = LR / 10
                 # create new optimizer with lower learning rate
                 optimizer = optim.SGD(
@@ -175,7 +175,7 @@ def train_model(
                     lr=LR,
                     momentum=0.9,
                     weight_decay=weight_decay)
-                print("created new optimizer with LR " + str(LR))
+                print("created new optimizer with LR " + str(LR),file=f)
 
             # checkpoint model if has best val loss yet
             if phase == 'val' and epoch_loss < best_loss:
@@ -216,7 +216,7 @@ def train_model(
 
         total_done += batch_size
         if(total_done % (100 * batch_size) == 0):
-            print("completed " + str(total_done) + " so far in epoch")
+            print("completed " + str(total_done) + " so far in epoch",file=f)
 
         # old stopper
         # break if no val loss improvement in 3 epochs
@@ -226,7 +226,7 @@ def train_model(
 
     time_elapsed = time.time() - since
     print('Training complete in {:.0f}m {:.0f}s'.format(
-        time_elapsed // 60, time_elapsed % 60))
+        time_elapsed // 60, time_elapsed % 60),file=f)
 
     # load best model weights to return
     checkpoint_best = torch.load('results/checkpoint')
@@ -313,14 +313,14 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     if not use_gpu:
        raise ValueError("Error, requires GPU")
 
-    print("=> Training using ",DROP_RATE," drop rate")
-    print("=> Training using ",LR," learning rate")
-    print("=> Use ",NUM_LAYERS," layers in blocks")
+    print("=> Training using ",DROP_RATE," drop rate",file=f)
+    print("=> Training using ",LR," learning rate",file=f)
+    print("=> Use ",NUM_LAYERS," layers in blocks",file=f)
 
     model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS, drop_rate=DROP_RATE)
     
     #freezing layers
-    print("=> Freezing ",FREEZE_LAYERS," layers in blocks")
+    print("=> Freezing ",FREEZE_LAYERS," layers in blocks",file=f)
 
     if FREEZE_LAYERS > 42:
         freeze_transition = 3
@@ -340,26 +340,26 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     #add freeze for first convolution
     if limit_freeze > 0:
         limit_freeze+=3 
-    print(limit_freeze)
+    print(limit_freeze,file=f)
     for name, param in model.named_parameters():
         if i< limit_freeze:
-            # print(name)
+            # print(name,file=f)
             if("sEBlock" in name):
-                print("skipping layer : "+name)
+                print("skipping layer : "+name,file=f)
             else:
                 param.requires_grad = False
                 i=i+1
    
     # print model
-    # print("MODEL")
-    # print(model)
+    # print("MODEL",file=f)
+    # print(model,file=f)
 
     #print grad
-    # print("GRAD")
-    # # print(model.features.pool0)
+    # print("GRAD",file=f)
+    # # print(model.features.pool0,file=f)
     # for name,param in model.named_parameters():
-    #     print (name)
-    #     print(param.requires_grad)
+    #     print (name,file=f)
+    #     print(param.requires_grad,file=f)
 
     num_ftrs = model.classifier.in_features
     # add final layer with # outputs in same dimension of labels with sigmoid
