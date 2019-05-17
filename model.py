@@ -38,7 +38,7 @@ use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
 date = datetime.date.today()
 f = open(f"logs/output-retrain-{date}.txt", "a+")
-print("Available GPU count:" + str(gpu_count),file=f)
+print("Available GPU count:" + str(gpu_count))
 f.close()
 
 def checkpoint(model, best_loss, epoch, LR):
@@ -202,9 +202,9 @@ def train_model(
                 fi.write(f"{epoch},{epoch_loss}\n")
                 fi.close()
             elif phase == 'val':
-                f= open(f"logs/epoch_loss_val_{CHROMOSOME}.txt","a+")
-                f.write(f"{epoch},{epoch_loss}\n")  
-                f.close()
+                fv= open(f"logs/epoch_loss_val_{CHROMOSOME}.txt","a+")
+                fv.write(f"{epoch},{epoch_loss}\n")  
+                fv.close()
 
         # weight = model.features.conv0.weight
         # to_pil_image = transforms.ToPILImage()
