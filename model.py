@@ -39,7 +39,7 @@ gpu_count = torch.cuda.device_count()
 date = datetime.date.today()
 f = open(f"logs/output-retrain-{date}.txt", "a+")
 print("Available GPU count:" + str(gpu_count),file=f)
-
+f.close()
 
 def checkpoint(model, best_loss, epoch, LR):
     """
@@ -96,7 +96,7 @@ def train_model(
 
     """
 
-    f = open(f"logs/output-retrain-{date}.txt", "a+")
+    
     since = time.time()
 
     start_epoch = 1
@@ -106,6 +106,7 @@ def train_model(
 
     # iterate over epochs
     for epoch in range(start_epoch, num_epochs + 1):
+        f = open(f"logs/output-retrain-{date}.txt", "a+")
         print('Epoch {}/{}'.format(epoch, num_epochs),file=f)
         print('-' * 10,file=f)
 
@@ -215,6 +216,8 @@ def train_model(
         #     img = to_pil_image(weight[x].cpu())
         #     image_path = 'images/'+str(epoch)+'/'+str(x)+'.png'
         #     img.save(image_path)
+
+        f.close()
 
         total_done += batch_size
         if(total_done % (100 * batch_size) == 0):
@@ -400,5 +403,6 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
         data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
+    f.close()
 
     return preds, aucs, epoch_loss
