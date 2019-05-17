@@ -96,7 +96,7 @@ def train_model(
 
     """
 
-    f = open(f"logs/output-genetic-{date}.txt", "a+")
+    f = open(f"logs/output-retrain-{date}.txt", "a+")
     since = time.time()
 
     start_epoch = 1
@@ -255,7 +255,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     BATCH_SIZE = 128
     currentDT = datetime.datetime.now()
 
-    f = open(f"logs/output-genetic-{date}.txt", "a+")
+    f = open(f"logs/output-retrain-{date}.txt", "a+")
     # try:
     #     rmtree('results/')
     # except BaseException:
