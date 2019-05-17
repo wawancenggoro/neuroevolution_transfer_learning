@@ -38,7 +38,6 @@ use_gpu = torch.cuda.is_available()
 gpu_count = torch.cuda.device_count()
 date = datetime.date.today()
 print("Available GPU count:" + str(gpu_count))
-f.close()
 
 def checkpoint(model, best_loss, epoch, LR):
     """
@@ -397,6 +396,5 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(
         data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
-    f.close()
 
     return preds, aucs, epoch_loss
