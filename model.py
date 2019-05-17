@@ -77,8 +77,7 @@ def train_model(
         weight_decay,
         PATH_TO_IMAGES,
         CHROMOSOME,
-        data_transforms,
-        f):
+        data_transforms):
     """
     Fine tunes torchvision model to NIH CXR data.
 
@@ -96,6 +95,8 @@ def train_model(
         best_epoch: epoch on which best model val loss was obtained
 
     """
+
+    f = open(f"logs/output-genetic-{date}.txt", "a+")
     since = time.time()
 
     start_epoch = 1
@@ -253,6 +254,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     NUM_EPOCHS = NUM_OF_EPOCHS
     BATCH_SIZE = 64
     currentDT = datetime.datetime.now()
+
+    f = open(f"logs/output-genetic-{date}.txt", "a+")
     # try:
     #     rmtree('results/')
     # except BaseException:
@@ -392,7 +395,7 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     # train model
     model, best_epoch, epoch_loss = train_model(model, criterion, optimizer, LR, num_epochs=NUM_EPOCHS,
                                     dataloaders=dataloaders, dataset_sizes=dataset_sizes, weight_decay=WEIGHT_DECAY,
-                                     PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms,f=f)
+                                     PATH_TO_IMAGES=PATH_TO_IMAGES, CHROMOSOME = CHROMOSOME, data_transforms = data_transforms)
 
     # get preds and AUCs on test fold
     preds, aucs = E.make_pred_multilabel(

@@ -14,6 +14,7 @@ class GeneticAlgorithm(object):
         pass
 
     def run(self):
+        f = open(f"logs/output-genetic-{date}.txt", "a+")
         population = self.genetics.initial()
         print("population ",population,file=f)
         counter = 0
@@ -91,6 +92,8 @@ class GeneticFunctions(object):
     pass
 
 if __name__ == "__main__":
+
+    f = open(f"logs/output-genetic-{date}.txt", "a+")
     """
     example: Mapped guess prepared Text
     """
@@ -118,6 +121,7 @@ if __name__ == "__main__":
             return [self.random_chromo() for j in range(self.size)]
 
         def fitness(self, chromo):
+            f = open(f"logs/output-genetic-{date}.txt", "a+")
             # larger is better, matched == 0
             # return -sum(abs(c - t) for c, t in zip(chromo, self.target))
             PATH_TO_IMAGES = "../images_resized/"
@@ -147,6 +151,7 @@ if __name__ == "__main__":
             return fitness
 
         def check_stop(self, fits_populations):
+            f = open(f"logs/output-genetic-{date}.txt", "a+")
             self.counter += 1
             # if self.counter % 10 == 0:
             print("fitness and population : ",fits_populations,file=f)
@@ -172,6 +177,7 @@ if __name__ == "__main__":
             return self.counter >= self.limit
 
         def parents(self, fits_populations):
+            f = open(f"logs/output-genetic-{date}.txt", "a+")
             while True:
                 father = self.tournament(fits_populations)
                 mother = self.tournament(fits_populations)
@@ -180,6 +186,7 @@ if __name__ == "__main__":
             pass
 
         def crossover(self, parents):
+            f = open(f"logs/output-genetic-{date}.txt", "a+")
             father, mother = parents
             index1 = random.randint(1, len(self.target) - 2)
             index2 = random.randint(1, len(self.target) - 2)
@@ -189,6 +196,7 @@ if __name__ == "__main__":
             return (child1, child2)
 
         def uniform_crossover(self,parents):
+            f = open(f"logs/output-genetic-{date}.txt", "a+")
             father, mother = parents
             child1 = father
             child2 = mother
@@ -202,6 +210,7 @@ if __name__ == "__main__":
             
 
         def mutation(self, chromosome):
+            f = open(f"logs/output-genetic-{date}.txt", "a+")
             # index = random.randint(0, len(self.target) - 1)
             # vary = random.randint(-5, 5)
             # mutated = list(chromosome)
