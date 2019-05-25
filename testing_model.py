@@ -42,8 +42,8 @@ NUM_LAYERS = 58
 FREEZE_LAYERS = 0
 DROP_RATE = 0.0
 CHROMOSOME = [58, 0, 2, 0]
-NUM_OF_EPOCHS = 100
-BATCH_SIZE = 16
+NUM_OF_EPOCHS = 1
+BATCH_SIZE = 32
 currentDT = datetime.datetime.now()
 # try:
 #     rmtree('results/')
@@ -98,11 +98,11 @@ dataloaders['val'] = torch.utils.data.DataLoader(
     num_workers=0)
 
 # load model
-checkpoint_best = torch.load('results/checkpoint')
+checkpoint_best = torch.load('results/full_retrain/checkpoint')
 model = checkpoint_best['model']
 epoch_loss = 0.02
 
-summary(model)
+# summary(model)
 # get preds and AUCs on test fold
-# preds, aucs = E.make_pred_multilabel(
-    # data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
+preds, aucs = E.make_pred_multilabel(
+    data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
