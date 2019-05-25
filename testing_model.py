@@ -110,4 +110,4 @@ preds, aucs = E.make_pred_multilabel(
 end = time.time()
 duration = end-start
 print('Testing complete in {:.0f}m {:.0f}s'.format(
-        time_elapsed // 60, time_elapsed % 60))
+        duration // 60, duration % 60))
