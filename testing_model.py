@@ -8,10 +8,8 @@ from torch.optim import lr_scheduler
 from torch.autograd import Variable
 import torchvision
 from torchvision import datasets, models, transforms
-from torchsummary import summary
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
-from tensorboardX import SummaryWriter
 import torchvision.utils as vutils
 
 # image imports
