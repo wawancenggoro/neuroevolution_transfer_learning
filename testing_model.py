@@ -33,6 +33,8 @@ import val_model as V
 import densenet as densenet
 import datetime
 
+start = time.time()
+
 PATH_TO_IMAGES = "../images_resized/"
 WEIGHT_DECAY = 1e-4
 LEARNING_RATE = 0.01
@@ -104,3 +106,8 @@ epoch_loss = 0.02
 # get preds and AUCs on test fold
 preds, aucs = E.make_pred_multilabel(
     data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
+
+end = time.time()
+duration = end-start
+print('Testing complete in {:.0f}m {:.0f}s'.format(
+        time_elapsed // 60, time_elapsed % 60))
