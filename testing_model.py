@@ -98,7 +98,7 @@ dataloaders['val'] = torch.utils.data.DataLoader(
     num_workers=0)
 
 # load model
-checkpoint_best = torch.load('results/full_retrain/checkpoint')
+checkpoint_best = torch.load('results/genetic_retrain/checkpoint')
 model = checkpoint_best['model']
 epoch_loss = 0.02
 
