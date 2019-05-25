@@ -29,6 +29,7 @@ import csv
 
 import cxr_dataset as CXR
 import eval_model as E
+import test_model as T
 import val_model as V
 import densenet as densenet
 import datetime
@@ -104,7 +105,7 @@ epoch_loss = 0.02
 
 # summary(model)
 # get preds and AUCs on test fold
-preds, aucs = E.make_pred_multilabel(
+a = T.make_pred_multilabel(
     data_transforms, model, PATH_TO_IMAGES, epoch_loss, CHROMOSOME)
 
 end = time.time()
