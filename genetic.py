@@ -50,6 +50,7 @@ class GeneticAlgorithm(object):
                 nexts.append(self.genetics.mutation(ch) if mutate else ch)
                 pass
             pass
+            print("Next Gen " + str(nexts))
         self.genetics.init_parents = True
         return nexts[0:size]
     pass
