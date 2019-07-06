@@ -38,24 +38,24 @@ class GeneticAlgorithm(object):
             father = parent1
             mother = parent2
             cross = random.random() < self.genetics.probability_crossover()
-            print("cross "+str(cross))
+            # print("cross "+str(cross))
             children = self.genetics.uniform_crossover(parents) if cross else parents
             for ch in children:
                 mutate = random.random() < self.genetics.probability_mutation()
                 nexts.append(self.genetics.mutation(ch) if mutate else ch)
                 pass
             pass
-            print("Next Gen A " + str(nexts))
+            # print("Next Gen A " + str(nexts))
             if(self.genetics.init_parents):
                 
-                print("Father " + str(father))
-                print("Mother " + str(mother))
+                # print("Father " + str(father))
+                # print("Mother " + str(mother))
                 nexts.append(father)
                 nexts.append(mother)
                 self.genetics.init_parents = False
-                print("Next Gen with parent" + str(nexts))
+                # print("Next Gen with parent" + str(nexts))
 
-            print("Next Gen B " + str(nexts))
+            # print("Next Gen B " + str(nexts))
         self.genetics.init_parents = True
         return nexts[0:size]
     pass
@@ -153,7 +153,7 @@ if __name__ == "__main__":
             # print("NUM_LAYERS ",NUM_LAYERS)
             # print("FREEZE_LAYERS ",FREEZE_LAYERS)
             # print("DROP_RATE ",DROP_RATE)
-            NUM_OF_EPOCHS = 1
+            NUM_OF_EPOCHS = 5
             fitness = 0
             key = '-'.join(str(e) for e in chromo)
             try:
@@ -217,7 +217,7 @@ if __name__ == "__main__":
             child2 = []
             for x in range(len(father)):
                 prob = random.uniform(0.0, 1.0)
-                print("prob crossover "+str(prob))
+                # print("prob crossover "+str(prob))
                 if prob > 0.5:
                     child1.append(mother[x])
                     child2.append(father[x])
