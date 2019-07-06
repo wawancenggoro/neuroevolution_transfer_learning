@@ -221,11 +221,11 @@ if __name__ == "__main__":
                 prob = random.uniform(0.0, 1.0)
                 print("prob crossover "+str(prob))
                 if prob > 0.5:
-                    child1[x] = mother[x]
-                    child2[x] = father[x]
+                    child1.append(mother[x])
+                    child2.append(father[x])
                 else:
-                    child1[x] = father[x]
-                    child2[x] = mother[x]
+                    child1.append(father[x])
+                    child2.append(mother[x])
             return (child1,child2)
 
             
