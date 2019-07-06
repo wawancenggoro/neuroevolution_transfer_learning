@@ -41,7 +41,7 @@ class GeneticAlgorithm(object):
                 nexts.append(self.genetics.mutation(ch) if mutate else ch)
                 pass
             pass
-
+            print("Next Gen A " + str(nexts))
             if(self.genetics.init_parents):
                 father, mother = parents
                 print("Father " + str(father))
@@ -51,7 +51,7 @@ class GeneticAlgorithm(object):
                 self.genetics.init_parents = False
                 print("Next Gen with parent" + str(nexts))
 
-            print("Next Gen " + str(nexts))
+            print("Next Gen B " + str(nexts))
         self.genetics.init_parents = True
         return nexts[0:size]
     pass
