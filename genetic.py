@@ -35,6 +35,7 @@ class GeneticAlgorithm(object):
         while len(nexts) < size:
             parents = next(parents_generator)
             cross = random.random() < self.genetics.probability_crossover()
+            print("cross "+str(cross))
             children = self.genetics.uniform_crossover(parents) if cross else parents
             for ch in children:
                 mutate = random.random() < self.genetics.probability_mutation()
