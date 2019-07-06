@@ -42,6 +42,7 @@ class GeneticAlgorithm(object):
                 nexts.append(father)
                 nexts.append(mother)
                 self.genetics.init_parents = False
+                print("Next Gen with parent" + str(nexts))
 
             cross = random.random() < self.genetics.probability_crossover()
             children = self.genetics.uniform_crossover(parents) if cross else parents
