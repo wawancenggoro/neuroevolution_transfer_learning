@@ -4,6 +4,7 @@ import model as M
 
 import printlog as printlog
 import datetime
+import pdb
 
 date = datetime.date.today()
 
@@ -37,7 +38,7 @@ class GeneticAlgorithm(object):
             parent1, parent2 = parents
             father = parent1
             mother = parent2
-
+            pdb.set_trace()
             cross = random.random() < self.genetics.probability_crossover()
             print("cross "+str(cross))
             children = self.genetics.uniform_crossover(parents) if cross else parents
