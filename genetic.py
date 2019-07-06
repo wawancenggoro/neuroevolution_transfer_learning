@@ -37,6 +37,8 @@ class GeneticAlgorithm(object):
 
             if(self.genetics.init_parents):
                 father, mother = parents
+                print("Father " + str(father))
+                print("Mother " + str(mother))
                 nexts.append(father)
                 nexts.append(mother)
                 self.genetics.init_parents = False
@@ -145,7 +147,7 @@ if __name__ == "__main__":
             # print("NUM_LAYERS ",NUM_LAYERS)
             # print("FREEZE_LAYERS ",FREEZE_LAYERS)
             # print("DROP_RATE ",DROP_RATE)
-            NUM_OF_EPOCHS = 5
+            NUM_OF_EPOCHS = 1
             fitness = 0
             key = '-'.join(str(e) for e in chromo)
             try:
