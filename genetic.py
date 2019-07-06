@@ -241,6 +241,8 @@ if __name__ == "__main__":
                             mutated[cell] = old_data
                         if mutated[cell] > 18:
                             mutated[cell] = old_data
+                        if mutated[cell] < 0:
+                            mutated[cell] = old_data
                     elif cell == 2:
                         vary = random.randint(-1, 1)
                         mutated[cell] += vary
