@@ -215,14 +215,17 @@ if __name__ == "__main__":
         def uniform_crossover(self,parents):
 
             father, mother = parents
-            child1 = father
-            child2 = mother
+            child1 = []
+            child2 = []
             for x in range(len(father)):
                 prob = random.uniform(0.0, 1.0)
                 print("prob crossover "+str(prob))
                 if prob > 0.5:
                     child1[x] = mother[x]
                     child2[x] = father[x]
+                else:
+                    child1[x] = father[x]
+                    child2[x] = mother[x]
             return (child1,child2)
 
             
