@@ -9,9 +9,9 @@ PATH_TO_IMAGES = "../images_resized/"
 WEIGHT_DECAY = 1e-4
 LEARNING_RATE = 0.1
 NUM_LAYERS = 57
-FREEZE_LAYERS = 2
+FREEZE_LAYERS = 4
 DROP_RATE = 0.1
-chromosome = [57, 2, 1, 1]
+chromosome = [57, 4, 1, 1]
 NUM_OF_EPOCHS = 100
 preds, aucs = M.train_cnn(PATH_TO_IMAGES, LEARNING_RATE, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_RATE, chromosome, NUM_OF_EPOCHS)
 
