@@ -318,9 +318,8 @@ def train_cnn(PATH_TO_IMAGES, LR, WEIGHT_DECAY, NUM_LAYERS, FREEZE_LAYERS, DROP_
     print("=> Training using ",LR," learning rate")
     print("=> Use ",NUM_LAYERS," layers in blocks")
 
-    #model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS, drop_rate=DROP_RATE)
-    
-    model = modified_densenet.densenet121(type='every-densenet', pretrained=True)
+    model = densenet.densenet121(pretrained=True, num_layers=NUM_LAYERS, drop_rate=DROP_RATE)
+    #model = modified_densenet.densenet121(type='every-densenet', pretrained=True)
 
     #freezing layers
     print("=> Freezing ",FREEZE_LAYERS," layers in blocks")
